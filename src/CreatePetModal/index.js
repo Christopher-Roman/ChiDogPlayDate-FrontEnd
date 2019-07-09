@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Modal from 'react-modal'
+import axios from 'axios';
 
 //*****************************************//
 //                                         //
@@ -23,28 +24,76 @@ const customStyles = {
   }
 };
 
-const CreatePetModal = (props) => {
-	return (
-		<Modal
-			isOpen={props.addPet} 
-			style={customStyles}
-			onRequestClose={props.closeAddPet}>
-          	<div>Create a new Budget!</div>
-          	<br/>
-          	<form onSubmit={props.newPet}>
-          		<label>Pet Name</label>
-          		<br/>
-	            <input name='firstName' type='text' onChange={props.handleChange} />
-	            <br/>
-	            <label>Age</label>
-	            <br/>
-	            <input name='age' type='text' onChange={props.handleChange} />
-          		<br/>
-          		<button>Submit</button>
-          	</form>
-          	<button onClick={props.closeAddPet}>close</button>
-        </Modal>
-    )
+// Allows Accessibility Reading
+Modal.setAppElement('#root')
+
+class CreatePetModal extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      firstName: '',
+      selectedFile: null,
+      uploadProgress: ''
+    }
+  }
+  fileSelectHandler = (e) => {
+    this.setState({
+        selectedFile: e.target.files[0]
+    });
+  }
+  fileUploadHandler = async () => {
+      const formData = new FormData();
+      formData.append('petPhoto', this.state.selectedFile, this.state.selectedFile.name);
+      formData.append('firstName', this.state.firstName);
+      await axios.post(process.env.REACT_APP_URL + '/pet/new', formData, { withCredentials: true }, {
+        config: { headers: { 'Content-Type': 'multipart/form-data' } },
+        onUploadProgress: progressEvent => {
+          console.log('Upload Progress: ' + Math.round((progressEvent.loaded / progressEvent.total) * 100) + '%')
+        }
+      })
+      .then(res => {
+        console.log(res);
+      })
+    }
+    handleSubmit = async (e) => {
+      e.preventDefault();
+      this.fileUploadHandler();
+      this.props.closeAddPet().then(this.getPet());
+    }
+    handleChange = (e) => {
+    this.setState({
+      [e.currentTarget.name]: e.currentTarget.value
+    })
+  }
+  render() {
+  	return (
+  		<Modal
+  			isOpen={this.props.addPet} 
+  			style={customStyles}
+  			onRequestClose={this.props.closeAddPet}>
+            	<div>Add a pet!</div>
+            	<br/>
+            	<form onSubmit={this.handleSubmit}>
+            		<label>Pet Name</label>
+            		<br/>
+  	            <input name='firstName' type='text' onChange={this.handleChange} />
+  	            <br/>
+  	            <label>Age</label>
+  	            <br/>
+  	            <input style={{display: 'none'}} type="file" name="img" onChange={this.fileSelectHandler} ref={fileInput => this.fileInput = fileInput} />
+                <h3>{ this.state.uploadProgress }</h3>
+                <button className="homeBtn" onClick={ 
+                  (e) => { 
+                    e.preventDefault()
+                    this.fileInput.click()
+                  } 
+          }>Upload Image</button> <br /><br /><br /> 
+          <button>Submit</button>
+            	</form>
+            	<button onClick={this.props.closeAddPet}>close</button>
+          </Modal>
+      )
+  }
 }
 
 export default CreatePetModal;

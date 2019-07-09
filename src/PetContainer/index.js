@@ -1,25 +1,9 @@
 import React, { Component } from 'react';
-import Modal from 'react-modal';
 import Pets from '../Pets';
 import CreatePetModal from '../CreatePetModal'
 
 require('../App.css');
 
-//Styles for Modal
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)',
-    backgroundColor		  : 'rgba(69,179,224)'
-  }
-};
-
-// Allows Accessibility Reading
-Modal.setAppElement('#root')
 
 class PetContainer extends Component {
 	constructor(props) {
@@ -85,7 +69,7 @@ class PetContainer extends Component {
 				sex: '',
 				petPhoto: '',
 				_id: ''
-			},
+			}
 		}
 	}
 	getPet = async () => {
@@ -219,7 +203,8 @@ class PetContainer extends Component {
 		})
 		const newPetResponse = await newPet.json();
 		this.setState({
-			pets: [...this.state.pets, newPetResponse.data]
+			pets: [...this.state.pets, newPetResponse.data],
+			addPet: false
 		})
 	}
 	deletePet = async (id) => {
@@ -260,8 +245,8 @@ class PetContainer extends Component {
 				<br/>
 				<br/>
 				<br/>
-				<button className='newBudget' onClick={this.openAddPetModal}>Add a Pet?</button>
-				{this.state.addPet ? <CreatePetModal newPet={this.newPet} closeAddPet={this.closeAddPetModal} handleChange={this.handleChange} addPet={this.state.addPet} /> : null}
+				<button className='newPet' onClick={this.openAddPetModal}>Add a Pet?</button>
+				{this.state.addPet ? <CreatePetModal getPet={this.getPet} closeAddPet={this.closeAddPetModal} openAddPet={this.openAddPetModal} addPet={this.state.addPet} /> : null}
 			</div>
 		)
 	}
