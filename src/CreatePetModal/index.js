@@ -46,19 +46,15 @@ class CreatePetModal extends Component {
       formData.append('petPhoto', this.state.selectedFile, this.state.selectedFile.name);
       formData.append('firstName', this.state.firstName);
       await axios.post(process.env.REACT_APP_URL + '/pet/new', formData, { withCredentials: true }, {
-        config: { headers: { 'Content-Type': 'multipart/form-data' } },
         onUploadProgress: progressEvent => {
           console.log('Upload Progress: ' + Math.round((progressEvent.loaded / progressEvent.total) * 100) + '%')
         }
-      })
-      .then(res => {
-        console.log(res);
       })
     }
     handleSubmit = async (e) => {
       e.preventDefault();
       this.fileUploadHandler();
-      this.props.closeAddPet().then(this.getPet());
+      this.props.closeAddPet()
     }
     handleChange = (e) => {
     this.setState({
@@ -80,15 +76,9 @@ class CreatePetModal extends Component {
   	            <br/>
   	            <label>Age</label>
   	            <br/>
-  	            <input style={{display: 'none'}} type="file" name="img" onChange={this.fileSelectHandler} ref={fileInput => this.fileInput = fileInput} />
+  	            <input type="file" name="img" onChange={this.fileSelectHandler} ref={fileInput => this.fileInput = fileInput} />
                 <h3>{ this.state.uploadProgress }</h3>
-                <button className="homeBtn" onClick={ 
-                  (e) => { 
-                    e.preventDefault()
-                    this.fileInput.click()
-                  } 
-          }>Upload Image</button> <br /><br /><br /> 
-          <button>Submit</button>
+                <button>Submit</button>
             	</form>
             	<button onClick={this.props.closeAddPet}>close</button>
           </Modal>

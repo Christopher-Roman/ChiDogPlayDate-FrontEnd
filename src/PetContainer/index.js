@@ -4,6 +4,7 @@ import CreatePetModal from '../CreatePetModal'
 
 require('../App.css');
 
+let isMounted = false;
 
 class PetContainer extends Component {
 	constructor(props) {
@@ -81,7 +82,6 @@ class PetContainer extends Component {
 			}
 		})
 		const petParsedResponse = await pet.json();
-		console.log(petParsedResponse);
 		return petParsedResponse;
 	}
 	componentDidMount() {
@@ -99,6 +99,23 @@ class PetContainer extends Component {
 				})
 			}
 		})
+	}
+	componentDidUpdate(prevProps, prevState) {
+		if(isMounted) {
+			if(prevProps.pets !== prevState.pets) {
+				this.getPet().then(pet => {
+					if(pet.status === 200) {
+						let petArray = pet.data[0].pet
+						this.setState({
+							pets: petArray
+						})
+					}
+				})
+			}
+		}
+	}
+	componentWillUnmount() {
+		isMounted = false;
 	}
 	closeAddPetModal = () => {
 		this.setState({
@@ -174,39 +191,6 @@ class PetContainer extends Component {
 			})
 		}
 	}
-	newPet = async (e) => {
-		e.preventDefault();
-		const newPet = await fetch(process.env.REACT_APP_URL + '/pet/new', {
-			method: 'POST',
-			credentials: 'include',
-			body: JSON.stringify({
-				firstName: this.state.firstName,
-				middleName: this.state.middleName,
-				lastName: this.state.lastName,
-				weight: this.state.weight,
-				age: this.state.age,
-				peopleSkills: this.state.peopleSkills,
-				dogSkills: this.state.dogSkills,
-				favTreat: this.state.favTreat,
-				favToy: this.state.favToy,
-				favPlay: this.state.favPlay,
-				breed: this.state.breed,
-				fixed: this.state.fixed,
-				owner: this.state.owner,
-				bio: this.state.bio,
-				sex: this.state.sex,
-				petPhoto: this.state.petPhoto
-			}),
-			headers: {
-				'Content-Type':'application/json'
-			}
-		})
-		const newPetResponse = await newPet.json();
-		this.setState({
-			pets: [...this.state.pets, newPetResponse.data],
-			addPet: false
-		})
-	}
 	deletePet = async (id) => {
 		try {
 			const deletedPet = await fetch(process.env.REACT_APP_URL + '/pet/' + id + '/delete', {
@@ -246,7 +230,7 @@ class PetContainer extends Component {
 				<br/>
 				<br/>
 				<button className='newPet' onClick={this.openAddPetModal}>Add a Pet?</button>
-				{this.state.addPet ? <CreatePetModal getPet={this.getPet} closeAddPet={this.closeAddPetModal} openAddPet={this.openAddPetModal} addPet={this.state.addPet} /> : null}
+				{this.state.addPet ? <CreatePetModal getPet={this.getPet} closeAddPet={this.closeAddPetModal} openAddPet={this.openAddPetModal} pets={this.state.pets} addPet={this.state.addPet} /> : null}
 			</div>
 		)
 	}

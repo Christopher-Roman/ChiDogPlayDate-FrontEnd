@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import HeaderApp from './HeaderApp';
 import Login from './Login';
 import Register from './Register';
-import PetContainer from './PetContainer'
+import PetContainer from './PetContainer';
+import ParkContainer from './ParkContainer';
 import './App.css';
 
 let loginAttempt = 0
@@ -65,7 +66,6 @@ class App extends Component {
         }
       })
       const parsedResponse = await loginReponse.json();
-      console.log(parsedResponse);
       if(parsedResponse.status === 200) {
         this.setState({
           loggedIn: true,
@@ -160,15 +160,14 @@ class App extends Component {
   render(){
     return (
       <div>
-        <div>
           <div className='navbar'>
             <HeaderApp userInfo={this.state} handleLogout={this.handleLogout} viewPets={this.viewPets} viewPhotos={this.viewPhotos} viewPosts={this.viewPosts} viewUser={this.viewUser} viewMaps={this.viewMaps} />
           </div>
-        </div>
         <div>
           {!this.state.loggedIn && !this.state.loginFail && !this.state.register ? <Login registration={this.register} handleChange={this.handleChange} handleSubmit={this.handleSubmit} /> : null }
           {this.state.register || this.state.loginFail ? <Register haveAnAccount={this.haveAnAccount} loggedIn={this.loggedIn} register={this.register} userInfo={this.state} /> : null }
           {this.state.pets && this.state.loggedIn ? <PetContainer handleChange={this.handleChange} userInfo={this.state} /> : null }
+          {this.state.maps && this.state.loggedIn ? <ParkContainer userInfo={this.state} /> : null}
         </div>
       </div>
     )
