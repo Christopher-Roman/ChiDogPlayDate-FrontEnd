@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Pets from '../Pets';
-import CreatePetModal from '../CreatePetModal'
+import CreatePetModal from '../CreatePetModal';
+import ViewPet from '../ViewPet';
 
 require('../App.css');
 
@@ -28,10 +29,10 @@ class PetContainer extends Component {
 			sex: '',
 			petPhoto: '',
 			_id: '',
-			petViewModal: false,
 			addPet: false,
 			pets: [],
 			activePet: false,
+			petViewModal: false,
 			petToView: {
 				firstName: '',
 				middleName: '',
@@ -231,6 +232,7 @@ class PetContainer extends Component {
 				<br/>
 				<button className='newPet' onClick={this.openAddPetModal}>Add a Pet?</button>
 				{this.state.addPet ? <CreatePetModal getPet={this.getPet} closeAddPet={this.closeAddPetModal} openAddPet={this.openAddPetModal} pets={this.state.pets} addPet={this.state.addPet} /> : null}
+				{this.state.petViewModal ? <ViewPet petViewToggle={this.petViewToggle} petToView={this.state.petToView} petViewModal={this.state.petViewModal} /> : null }
 			</div>
 		)
 	}

@@ -1,3 +1,22 @@
 .photoThumbnail img {
   max-width: 200px;
 }
+
+.photo-container img {
+	max-width: 400px;
+}
+
+.pet-view-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.pet-info-container {
+	flex-direction: column;
+	padding-right: 45px;
+}
+
+.pet-info-container label {
+	text-decoration: underline;
+	font-weight: bold;
+}

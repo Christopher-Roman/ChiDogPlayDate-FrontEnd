@@ -74,7 +74,7 @@ class CreatePetModal extends Component {
             		<br/>
   	            <input name='firstName' type='text' onChange={this.handleChange} />
   	            <br/>
-  	            <label>Age</label>
+  	            <label>Pet Photo</label>
   	            <br/>
   	            <input type="file" name="img" onChange={this.fileSelectHandler} ref={fileInput => this.fileInput = fileInput} />
                 <h3>{ this.state.uploadProgress }</h3>
