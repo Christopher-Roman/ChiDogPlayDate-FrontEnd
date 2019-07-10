@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Pets from '../Pets';
 import CreatePetModal from '../CreatePetModal';
 import ViewPet from '../ViewPet';
+import EditPet from '../EditPet'
 
 require('../App.css');
 
@@ -154,6 +155,7 @@ class PetContainer extends Component {
 	closeAndUpdatePet = async (e) => {
 		e.preventDefault();
 		try {
+			console.log(this.state.petToEdit);
 			const editPet = await fetch(process.env.REACT_APP_URL + '/pet/' + this.state.petToEdit._id + '/update', {
 				method: 'PUT',
 				credentials: 'include',
@@ -162,18 +164,17 @@ class PetContainer extends Component {
 					'Content-Type':'application/json'
 				}
 			})
-			this.getPet().then(pet => {
-				let petArray = pet.data[0].pet;
-				this.setState({
-					pet: petArray,
-					editPetModal: false
-				})
+			const parsedResponse = await editPet.json();
+			const newPetArray = parsedResponse.data.pet;
+			this.setState({
+				pets: newPetArray,
+				editPetModal: false
 			})
 		} catch(err) {
 			console.error(err)
 		}
 	}
-	closeEditPetModal() {
+	closeEditPetModal = () => {
 		this.setState({
 			editPetModal: false
 		})
@@ -233,6 +234,7 @@ class PetContainer extends Component {
 				<button className='newPet' onClick={this.openAddPetModal}>Add a Pet?</button>
 				{this.state.addPet ? <CreatePetModal getPet={this.getPet} closeAddPet={this.closeAddPetModal} openAddPet={this.openAddPetModal} pets={this.state.pets} addPet={this.state.addPet} /> : null}
 				{this.state.petViewModal ? <ViewPet petViewToggle={this.petViewToggle} petToView={this.state.petToView} petViewModal={this.state.petViewModal} /> : null }
+				{this.state.editPetModal ? <EditPet handlePetToEditChange={this.handlePetEditChange} closeEditPetModal={this.closeEditPetModal} petToEdit={this.state.petToEdit} editPetModal={this.state.editPetModal} closeAndUpdatePet={this.closeAndUpdatePet} /> : null}
 			</div>
 		)
 	}
