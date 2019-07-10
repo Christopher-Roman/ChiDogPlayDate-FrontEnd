@@ -4,6 +4,7 @@ import Login from './Login';
 import Register from './Register';
 import PetContainer from './PetContainer';
 import ParkContainer from './ParkContainer';
+import PhotoContainer from './PhotoContainer';
 import './App.css';
 
 let loginAttempt = 0
@@ -168,6 +169,7 @@ class App extends Component {
           {this.state.register || this.state.loginFail ? <Register haveAnAccount={this.haveAnAccount} loggedIn={this.loggedIn} register={this.register} userInfo={this.state} /> : null }
           {this.state.pets && this.state.loggedIn ? <PetContainer handleChange={this.handleChange} userInfo={this.state} /> : null }
           {this.state.maps && this.state.loggedIn ? <ParkContainer userInfo={this.state} /> : null}
+          {this.state.photos ? <PhotoContainer userInfo={this.state} /> : null}
         </div>
       </div>
     )
