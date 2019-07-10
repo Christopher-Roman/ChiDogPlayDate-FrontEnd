@@ -31,6 +31,7 @@ class ViewPet extends Component {
 	            		<div className='photo-card'>
 	            			<div className='photo-container'>
 	            				<img alt='pet' src={`${process.env.REACT_APP_URL}/${this.props.petToView.petPhoto}`}/>
+                                <input type="file" name="petPhoto" onChange={this.fileSelectHandler} ref={fileInput => this.fileInput = fileInput} />
 	            			</div>
 	            		</div>
 	            		<br/>

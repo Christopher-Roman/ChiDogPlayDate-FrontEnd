@@ -54,7 +54,8 @@ class CreatePetModal extends Component {
     handleSubmit = async (e) => {
       e.preventDefault();
       this.fileUploadHandler();
-      this.props.closeAddPet()
+      this.props.closeAddPet();
+      this.props.getPet();
     }
     handleChange = (e) => {
     this.setState({
@@ -76,7 +77,7 @@ class CreatePetModal extends Component {
   	            <br/>
   	            <label>Pet Photo</label>
   	            <br/>
-  	            <input type="file" name="img" onChange={this.fileSelectHandler} ref={fileInput => this.fileInput = fileInput} />
+  	            <input type="file" name="petPhoto" onChange={this.fileSelectHandler} ref={fileInput => this.fileInput = fileInput} />
                 <h3>{ this.state.uploadProgress }</h3>
                 <button>Submit</button>
             	</form>
