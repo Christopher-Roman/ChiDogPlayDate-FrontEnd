@@ -34,7 +34,6 @@ class EditPhotoModal extends Component {
 		}
 	}
 	render() {
-		console.log(this.props);
 	  	return (
 	  		<Modal
 				isOpen={this.props.editPhoto} 

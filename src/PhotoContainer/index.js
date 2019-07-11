@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import CreatePhotoModal from '../CreatePhotoModal';
 import EditPhotoModal from '../EditPhotoModal';
 import Photos from '../Photos'
+import ViewPhoto from '../ViewPhoto'
 import axios from 'axios';
 
 require('../App.css');
-
-let isMounted = false;
 
 class PhotoContainer extends Component {
 	constructor(props) {
@@ -23,7 +22,7 @@ class PhotoContainer extends Component {
 				_id: ''
 			},
 			addPhoto: false,
-			photoView: false,
+			viewPhoto: false,
 			photoToView: {
 				description: '',
 				photoUrl: '',
@@ -50,11 +49,9 @@ class PhotoContainer extends Component {
 		this.getPhoto().then(photo => {
 			if(photo.status === 200) {
 				let photoArray = photo.data
-				console.log(photo);
-				isMounted = true;
 				this.setState({
 					photos: photoArray,
-					username: photo.data[0].username
+					username: photo.data[0].createdBy
 				})
 			} else {
 				console.log(photo.status);
@@ -62,22 +59,16 @@ class PhotoContainer extends Component {
 		})
 	}
 	componentDidUpdate(prevProps, prevState) {
-		if(isMounted) {
-			if(prevProps !== prevState) {
-				this.getPhoto().then(photo => {
-					if(photo.status === 200) {
-						let photoArray = photo.data
-						isMounted = true
-						this.setState({
-							photos: photoArray
-						})
-					}
-				})
-			}
+		if(prevProps !== prevState) {
+			this.getPhoto().then(photo => {
+				if(photo.status === 200) {
+					let photoArray = photo.data
+					this.setState({
+						photos: photoArray
+					})
+				}
+			})
 		}
-	}
-	componentWillUnmount() {
-		isMounted = false
 	}
 	addPhotoOpen = () => {
 		this.setState({
@@ -152,8 +143,18 @@ class PhotoContainer extends Component {
 		this.editPhotoClose();
 		this.getPhoto()
 	}
-	photoViewToggle = (e) => {
-		console.log(e);
+	photoViewOpen = (photo) => {
+		this.setState({
+			viewPhoto: true,
+			photoToView: {
+				...photo
+			}
+		})
+	}
+	photoViewClose = () => {
+		this.setState({
+			viewPhoto: false
+		})
 	}
 	deletePhoto = async (id) => {
 		try {
@@ -176,9 +177,10 @@ class PhotoContainer extends Component {
 	render() {
 		return (
 			<div>
-				<Photos userInfo={this.props.userInfo} photoInfo={this.state.photos} viewPhoto={this.photoViewToggle} editPhotoOpen={this.editPhotoOpen} photoViewModal={this.state.photoView} deletePhoto={this.deletePhoto} />
-				{this.state.editPhoto ? <EditPhotoModal editPhotoOpen={this.editPhotoOpen} editPhotoClose={this.editPhotoClose} fileSelectHandler={this.fileSelectHandler} handlePhotoEditChange={this.handlePhotoEditChange} selectedFile={this.state.selectedFile} editPhoto={this.state.editPhoto} handlePutSubmit={this.handlePutSubmit} photoToEdit={this.state.photoToEdit} /> : null}
+				<Photos userInfo={this.props.userInfo} photoInfo={this.state.photos} photoViewToggle={this.photoViewOpen} editPhotoOpen={this.editPhotoOpen} deletePhoto={this.deletePhoto} />
 				{this.state.addPhoto ? <CreatePhotoModal addPhotoOpen={this.addPhotoOpen} addPhotoClose={this.addPhotoClose} fileSelectHandler={this.fileSelectHandler} handleChange={this.handleChange} handlePostSubmit={this.handlePostSubmit} addPhoto={this.state.addPhoto} selectedFile={this.state.selectedFile} /> : null }
+				{this.state.viewPhoto ? <ViewPhoto photoToView={this.state.photoToView} viewPhoto={this.state.viewPhoto} photoViewClose={this.photoViewClose} /> : null}
+				{this.state.editPhoto ? <EditPhotoModal editPhotoOpen={this.editPhotoOpen} editPhotoClose={this.editPhotoClose} fileSelectHandler={this.fileSelectHandler} handlePhotoEditChange={this.handlePhotoEditChange} selectedFile={this.state.selectedFile} editPhoto={this.state.editPhoto} handlePutSubmit={this.handlePutSubmit} photoToEdit={this.state.photoToEdit} /> : null}
 				<br/>
 				<br/>
 				<button onClick={this.addPhotoOpen} >Add a Photo</button>
