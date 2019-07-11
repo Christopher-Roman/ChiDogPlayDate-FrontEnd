@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
+import EditCommentModal from '../EditCommentModal'
 import axios from 'axios'
 require('../App.css');
 
@@ -21,9 +22,15 @@ class ViewPhoto extends Component {
 			viewPhoto: props.viewPhoto,
 			url: props.photoToView.photoUrl,
 			addComment: false,
+			editComment: false,
 			commentBody: '',
 			selectedFile: null,
-			comment: []
+			comment: [],
+			commentToEdit: {
+				commentBody: '',
+				photo: '',
+				_id: ''
+			}
 		}
 	}
 	componentDidMount(){
@@ -113,8 +120,51 @@ class ViewPhoto extends Component {
 			console.error(err)
 		}
 	}
-	editCommentOpen = async (comment) => {
-		console.log(comment);
+	closeAndUpdateComment = async () => {
+		try {
+			const formData = new FormData();
+			if(this.state.selectedFile) {
+				formData.append('photo', this.state.selectedFile, this.state.selectedFile.name);
+			}
+			formData.append('commentBody', this.state.commentToEdit.commentBody);
+			await axios.put(process.env.REACT_APP_URL + '/photo/' + this.props.photoToView._id + '/comment/' + this.state.commentToEdit._id + '/update', formData, {withCredentials: true}).then((response) => {
+				if(response.status === 200) {
+					this.setState({
+						comment: [...response.data.data.comment],
+						editComment: false
+					})
+				}
+			})
+		} catch(err) {
+			console.error(err)
+		}
+	}
+	editCommentOpen = (comment) => {
+		this.setState({
+			editComment: true,
+			commentToEdit: {
+				...comment
+
+			}
+		})
+	}
+	editCommentClose = () => {
+		this.setState({
+			editComment: false
+		})
+	}
+	handlePutSubmit = async (e) => {
+		e.preventDefault();
+		this.closeAndUpdateComment();
+		this.getPhoto();
+	}
+	handleCommentEditChange = (e) => {
+		this.setState({
+			commentToEdit: {
+				...this.state.commentToEdit,
+				[e.currentTarget.name]:e.currentTarget.value
+			}
+		})
 	}
 	render() {
 		let photoComments = null
@@ -171,6 +221,7 @@ class ViewPhoto extends Component {
 		        	</div>
 		    		<div className='comment-container'>
 		    			{photoComments}
+		    			{this.state.editComment ? <EditCommentModal handlePutSubmit={this.handlePutSubmit} commentToEdit={this.state.commentToEdit} handleCommentEditChange={this.handleCommentEditChange} editCommentClose={this.editCommentClose} editComment={this.state.editComment}  /> : null}
 		    			{this.state.addComment ? 
 						<div>
 							<form onSubmit={this.handlePostSubmit}>
