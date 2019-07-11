@@ -121,26 +121,26 @@ class ViewPhoto extends Component {
 		if(this.state.comment) {
 			photoComments = this.state.comment.map((comments) => {
 				let commentButtons = null
-		if(this.state.comment.length > 0) {
-			if(this.props.photoToView.createdBy === this.props.userInfo.username && this.props.photoToView.createdBy === this.state.comment.createdBy) {
-					commentButtons = 
-						<div>
-							<button className='medPosBtns' onClick={this.editCommentOpen.bind(null, comments)}>Edit</button>
-							<button className='medNegBtns' onClick={this.deleteComment.bind(null, comments._id)}>Delete</button>
-						</div>
-				} else if(this.state.comment.createdBy === this.props.userInfo.username) {
-					commentButtons = 
-					<div>
-						<button className='medPosBtns' onClick={this.editCommentOpen.bind(null, comments)}>Edit</button>
-						<button className='medNegBtns' onClick={this.deleteComment.bind(null, comments._id)}>Delete</button>
-					</div>
-				} else if(this.props.photoToView.createdBy === this.props.userInfo.username && this.state.comment.createdBy !== this.props.userInfo.username) {
-					commentButtons = 
-						<button className='medNegBtns' onClick={this.deleteComment.bind(null, comments._id)}>Delete</button>
-				} else {
-					commentButtons = null
+				if(this.state.comment.length > 0) {
+					if(this.props.photoToView.createdBy === this.props.userInfo.username && this.props.photoToView.createdBy === comments.createdBy) {
+							commentButtons = 
+								<div>
+									<button className='medPosBtns' onClick={this.editCommentOpen.bind(null, comments)}>Edit</button>
+									<button className='medNegBtns' onClick={this.deleteComment.bind(null, comments._id)}>Delete</button>
+								</div>
+						} else if(comments.createdBy === this.props.userInfo.username) {
+							commentButtons = 
+							<div>
+								<button className='medPosBtns' onClick={this.editCommentOpen.bind(null, comments)}>Edit</button>
+								<button className='medNegBtns' onClick={this.deleteComment.bind(null, comments._id)}>Delete</button>
+							</div>
+						} else if(this.props.photoToView.createdBy === this.props.userInfo.username && comments.createdBy !== this.props.userInfo.username) {
+							commentButtons = 
+								<button className='medNegBtns' onClick={this.deleteComment.bind(null, comments._id)}>Delete</button>
+						} else {
+							commentButtons = null
+						}
 				}
-		}
 			return (
 					<div key={comments._id}>
 						<div className='comment-card'>
