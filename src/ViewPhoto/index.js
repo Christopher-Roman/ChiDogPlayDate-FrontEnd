@@ -96,37 +96,52 @@ class ViewPhoto extends Component {
 		})
 	}
 	deleteComment = async (id) => {
-		console.log(id);
+		try {
+			const deletedComment = await fetch(process.env.REACT_APP_URL + '/photo/' + this.props.photoToView._id + '/comment/' + id + '/delete', {
+				method: 'DELETE',
+				credentials: 'include',
+				headers: {
+					'Content-Type':'application/json'
+				}
+			})
+			const parsedResponse = await deletedComment.json();
+			let photoComments = parsedResponse.data.comment;
+			this.setState({
+				comment: photoComments
+			})
+		} catch(err) {
+			console.error(err)
+		}
 	}
 	editCommentOpen = async (comment) => {
 		console.log(comment);
 	}
 	render() {
-		let commentButtons = null
+		let photoComments = null
+		if(this.state.comment) {
+			photoComments = this.state.comment.map((comments) => {
+				let commentButtons = null
 		if(this.state.comment.length > 0) {
-			if(this.props.photoToView.createdBy === this.props.userInfo.username && this.props.photoToView.createdBy === this.props.photoToView.comment.createdBy) {
+			if(this.props.photoToView.createdBy === this.props.userInfo.username && this.props.photoToView.createdBy === this.state.comment.createdBy) {
 					commentButtons = 
 						<div>
-							<button className='medPosBtns' onClick={this.editCommentOpen.bind(null, this.props.photoToView.comment)}>Edit</button>
-							<button className='medNegBtns' onClick={this.deleteComment.bind(null, this.props.photoToView.comment._id)}>Delete</button>
+							<button className='medPosBtns' onClick={this.editCommentOpen.bind(null, comments)}>Edit</button>
+							<button className='medNegBtns' onClick={this.deleteComment.bind(null, comments._id)}>Delete</button>
 						</div>
-				} else if(this.props.photoToView.comment.createdBy === this.props.userInfo.username) {
+				} else if(this.state.comment.createdBy === this.props.userInfo.username) {
 					commentButtons = 
 					<div>
-						<button className='medPosBtns' onClick={this.editCommentOpen.bind(null, this.props.photoToView.comment)}>Edit</button>
-						<button className='medNegBtns' onClick={this.deleteComment.bind(null, this.props.photoToView.comment._id)}>Delete</button>
+						<button className='medPosBtns' onClick={this.editCommentOpen.bind(null, comments)}>Edit</button>
+						<button className='medNegBtns' onClick={this.deleteComment.bind(null, comments._id)}>Delete</button>
 					</div>
-				} else if(this.props.photoToView.createdBy === this.props.userInfo.username && this.props.photoToView.comment.createdBy !== this.props.userInfo.username) {
+				} else if(this.props.photoToView.createdBy === this.props.userInfo.username && this.state.comment.createdBy !== this.props.userInfo.username) {
 					commentButtons = 
-						<button className='medNegBtns' onClick={this.deleteComment.bind(null, this.props.photoToView.comment._id)}>Delete</button>
+						<button className='medNegBtns' onClick={this.deleteComment.bind(null, comments._id)}>Delete</button>
 				} else {
 					commentButtons = null
 				}
 		}
-		let photoComments = null
-		if(this.state.comment) {
-			photoComments = this.state.comment.map((comments) => {
-				return (
+			return (
 					<div key={comments._id}>
 						<div className='comment-card'>
 							<div className='comment-container'>
