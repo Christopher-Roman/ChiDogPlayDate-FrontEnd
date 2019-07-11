@@ -23,8 +23,33 @@ class ViewPhoto extends Component {
 			addComment: false,
 			commentBody: '',
 			selectedFile: null,
-			comment: props.photoToView.comment
+			comment: []
 		}
+	}
+	componentDidMount(){
+		this.getPhoto().then(photo => {
+			if(photo.status === 200) {
+				console.log(photo.data.comment);
+				this.setState({
+					comment: [...photo.data.comment]
+				})
+			} else {
+				this.setState({
+					comment: []
+				})
+			}
+		})
+	}
+	getPhoto = async () => {
+		const photo = await fetch(process.env.REACT_APP_URL + '/photo/' + this.props.photoToView._id ,{
+			method: 'GET',
+			credentials: 'include',
+			headers: {
+				'Content-Type':'application/json'
+			}
+		})
+		const parsedResponse = await photo.json();
+		return parsedResponse
 	}
 	toggleAddComment = () => {
 		if(!this.state.addComment) {
@@ -51,12 +76,19 @@ class ViewPhoto extends Component {
 			formData.append('photo', this.state.selectedFile)
 		}
 		formData.append('commentBody', this.state.commentBody);
-		await axios.post(process.env.REACT_APP_URL + '/photo/' + this.props.photoToView._id + '/comment/new', formData, { withCredentials: true})
+		await axios.post(process.env.REACT_APP_URL + '/photo/' + this.props.photoToView._id + '/comment/new', formData, { withCredentials: true}).then((response) => {
+				if(response.status === 200) {
+					this.setState({
+						comment: [...response.data.data.comment],
+						addComment: false
+					})
+				}
+			}
+		)
 	}
 	handlePostSubmit = async (e) => {
 		e.preventDefault();
 		this.newComment();
-		this.toggleAddComment();
 	}
 	handleChange = (e) => {
 		this.setState({
@@ -71,7 +103,7 @@ class ViewPhoto extends Component {
 	}
 	render() {
 		let commentButtons = null
-		if(this.props.photoToView.comment.length > 0) {
+		if(this.state.comment.length > 0) {
 			if(this.props.photoToView.createdBy === this.props.userInfo.username && this.props.photoToView.createdBy === this.props.photoToView.comment.createdBy) {
 					commentButtons = 
 						<div>
@@ -92,8 +124,8 @@ class ViewPhoto extends Component {
 				}
 		}
 		let photoComments = null
-		if(this.props.photoToView.comment) {
-			photoComments = this.props.photoToView.comment.map((comments) => {
+		if(this.state.comment) {
+			photoComments = this.state.comment.map((comments) => {
 				return (
 					<div key={comments._id}>
 						<div className='comment-card'>

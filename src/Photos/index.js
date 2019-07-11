@@ -2,6 +2,7 @@ import React from 'react';
 require('../App.css');
 
 
+
 const Photos = (props) => {
 	let response = null
 	if(props.photoInfo.length <= 0) {

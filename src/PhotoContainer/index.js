@@ -15,6 +15,7 @@ class PhotoContainer extends Component {
 			selectedFile: null,
 			description: '',
 			photos: [],
+			activePhoto: false,
 			photoEdit: false,
 			photoToEdit: {
 				description: '',
@@ -48,10 +49,12 @@ class PhotoContainer extends Component {
 	componentDidMount() {
 		this.getPhoto().then(photo => {
 			if(photo.status === 200) {
-				let photoArray = photo.data
+				console.log(photo.data.photo);
+				let photoArray = photo.data.photo
 				this.setState({
 					photos: photoArray,
-					username: photo.data[0].createdBy
+					username: photo.data.username,
+					activePhoto: true
 				})
 			} else {
 				console.log(photo.status);
@@ -62,7 +65,7 @@ class PhotoContainer extends Component {
 		if(prevProps !== prevState) {
 			this.getPhoto().then(photo => {
 				if(photo.status === 200) {
-					let photoArray = photo.data
+					let photoArray = photo.data.photo
 					this.setState({
 						photos: photoArray
 					})
@@ -177,7 +180,7 @@ class PhotoContainer extends Component {
 	render() {
 		return (
 			<div>
-				<Photos userInfo={this.props.userInfo} photoInfo={this.state.photos} photoViewToggle={this.photoViewOpen} editPhotoOpen={this.editPhotoOpen} deletePhoto={this.deletePhoto} />
+				{this.state.activePhoto ? <Photos userInfo={this.props.userInfo} photoInfo={this.state.photos} photoViewToggle={this.photoViewOpen} editPhotoOpen={this.editPhotoOpen} deletePhoto={this.deletePhoto} /> : null }
 				{this.state.addPhoto ? <CreatePhotoModal addPhotoOpen={this.addPhotoOpen} addPhotoClose={this.addPhotoClose} fileSelectHandler={this.fileSelectHandler} handleChange={this.handleChange} handlePostSubmit={this.handlePostSubmit} addPhoto={this.state.addPhoto} selectedFile={this.state.selectedFile} /> : null }
 				{this.state.viewPhoto ? <ViewPhoto userInfo={this.state} photoInfo={this.state.photos} photoToView={this.state.photoToView} viewPhoto={this.state.viewPhoto} photoViewClose={this.photoViewClose} /> : null}
 				{this.state.editPhoto ? <EditPhotoModal editPhotoOpen={this.editPhotoOpen} editPhotoClose={this.editPhotoClose} fileSelectHandler={this.fileSelectHandler} handlePhotoEditChange={this.handlePhotoEditChange} selectedFile={this.state.selectedFile} editPhoto={this.state.editPhoto} handlePutSubmit={this.handlePutSubmit} photoToEdit={this.state.photoToEdit} /> : null}
