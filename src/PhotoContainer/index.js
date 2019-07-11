@@ -179,7 +179,7 @@ class PhotoContainer extends Component {
 			<div>
 				<Photos userInfo={this.props.userInfo} photoInfo={this.state.photos} photoViewToggle={this.photoViewOpen} editPhotoOpen={this.editPhotoOpen} deletePhoto={this.deletePhoto} />
 				{this.state.addPhoto ? <CreatePhotoModal addPhotoOpen={this.addPhotoOpen} addPhotoClose={this.addPhotoClose} fileSelectHandler={this.fileSelectHandler} handleChange={this.handleChange} handlePostSubmit={this.handlePostSubmit} addPhoto={this.state.addPhoto} selectedFile={this.state.selectedFile} /> : null }
-				{this.state.viewPhoto ? <ViewPhoto photoToView={this.state.photoToView} viewPhoto={this.state.viewPhoto} photoViewClose={this.photoViewClose} /> : null}
+				{this.state.viewPhoto ? <ViewPhoto userInfo={this.state} photoInfo={this.state.photos} photoToView={this.state.photoToView} viewPhoto={this.state.viewPhoto} photoViewClose={this.photoViewClose} /> : null}
 				{this.state.editPhoto ? <EditPhotoModal editPhotoOpen={this.editPhotoOpen} editPhotoClose={this.editPhotoClose} fileSelectHandler={this.fileSelectHandler} handlePhotoEditChange={this.handlePhotoEditChange} selectedFile={this.state.selectedFile} editPhoto={this.state.editPhoto} handlePutSubmit={this.handlePutSubmit} photoToEdit={this.state.photoToEdit} /> : null}
 				<br/>
 				<br/>
