@@ -20,3 +20,7 @@
 	text-decoration: underline;
 	font-weight: bold;
 }
+
+.profile-picture img {
+	max-height: 300px;
+}

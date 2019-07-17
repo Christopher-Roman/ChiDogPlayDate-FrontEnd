@@ -5,6 +5,7 @@ import Register from './Register';
 import PetContainer from './PetContainer';
 import ParkContainer from './ParkContainer';
 import PhotoContainer from './PhotoContainer';
+import UserContainer from './UserContainer';
 import './App.css';
 
 let loginAttempt = 0
@@ -170,6 +171,7 @@ class App extends Component {
           {this.state.pets && this.state.loggedIn ? <PetContainer handleChange={this.handleChange} userInfo={this.state} /> : null }
           {this.state.maps && this.state.loggedIn ? <ParkContainer userInfo={this.state} /> : null}
           {this.state.photos ? <PhotoContainer userInfo={this.state} /> : null}
+          {this.state.user ? <UserContainer userInfo={this.state} /> : null}
         </div>
       </div>
     )

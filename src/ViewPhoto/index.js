@@ -79,10 +79,10 @@ class ViewPhoto extends Component {
 		const formData = new FormData();
 		if(this.state.selectedFile) {
 			formData.append('photo', this.state.selectedFile, this.state.selectedFile.name);
+			formData.append('commentBody', this.state.commentBody)
 		} else {
-			formData.append('photo', this.state.selectedFile)
+			formData.append('commentBody', this.state.commentBody)
 		}
-		formData.append('commentBody', this.state.commentBody);
 		await axios.post(process.env.REACT_APP_URL + '/photo/' + this.props.photoToView._id + '/comment/new', formData, { withCredentials: true}).then((response) => {
 				if(response.status === 200) {
 					this.setState({
@@ -125,8 +125,10 @@ class ViewPhoto extends Component {
 			const formData = new FormData();
 			if(this.state.selectedFile) {
 				formData.append('photo', this.state.selectedFile, this.state.selectedFile.name);
+				formData.append('commentBody', this.state.commentToEdit.commentBody)
+			} else {
+				formData.append('commentBody', this.state.commentToEdit.commentBody);
 			}
-			formData.append('commentBody', this.state.commentToEdit.commentBody);
 			await axios.put(process.env.REACT_APP_URL + '/photo/' + this.props.photoToView._id + '/comment/' + this.state.commentToEdit._id + '/update', formData, {withCredentials: true}).then((response) => {
 				if(response.status === 200) {
 					this.setState({
@@ -199,6 +201,7 @@ class ViewPhoto extends Component {
 									<b>{comments.createdBy}</b><span> {comments.createdAt}</span>
 								</div>
 								<div className='comment-body'>
+									<img alt='User upload' className='photoList' src={`${process.env.REACT_APP_URL}/${comments.photo}`} /><br/>
 									{comments.commentBody}
 								</div>
 								{commentButtons}
@@ -229,7 +232,7 @@ class ViewPhoto extends Component {
 								<input type='text' name='commentBody' onChange={this.handleChange}/>
 								<label>Add Photo?</label>
 								<input type="file" name="photo" onChange={this.props.fileSelectHandler} ref={fileInput => this.fileInput = fileInput} />
-								<button/>
+								<button>submit</button>
 							</form>
 						</div>
 						 : null}

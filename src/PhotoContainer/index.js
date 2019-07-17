@@ -61,18 +61,6 @@ class PhotoContainer extends Component {
 			}
 		})
 	}
-	componentDidUpdate(prevProps, prevState) {
-		if(prevProps !== prevState) {
-			this.getPhoto().then(photo => {
-				if(photo.status === 200) {
-					let photoArray = photo.data.photo
-					this.setState({
-						photos: photoArray
-					})
-				}
-			})
-		}
-	}
 	addPhotoOpen = () => {
 		this.setState({
 			addPhoto: true
@@ -129,9 +117,12 @@ class PhotoContainer extends Component {
 	closeAndUpdatePhoto = async () => {
 		try {
 			const formData = new FormData()
-			formData.append('photoUrl', this.state.selectedFile, this.state.selectedFile.name);
-			formData.append('description', this.state.photoToEdit.description);
-			formData.append('_id', this.state.photoToEdit._id)
+			if(this.state.selectedFile) {
+				formData.append('photoUrl', this.state.selectedFile, this.state.selectedFile.name);
+				formData.append('description', this.state.photoToEdit.description);
+			} else {
+				formData.append('description', this.state.photoToEdit.description);
+			}
 			const editPhoto = await axios.put(process.env.REACT_APP_URL + '/photo/' + this.state.photoToEdit._id + '/update', formData, {withCredentials: true}, {
 			}).then(response => {
 				return response.data
