@@ -40,7 +40,8 @@ class PostContainer extends Component {
 	componentDidMount() {
 		this.getPosts().then(post => {
 			if(post.status === 200) {
-				let postArray = post.data.post
+				let postArray = post.data[0].post
+				console.log(postArray);
 				this.setState({
 					posts: postArray,
 					username: post.data.username,
@@ -51,13 +52,44 @@ class PostContainer extends Component {
 			}
 		})
 	}
-	newPost = async () => {
-		const post = 
+	newPost = async (e) => {
+		e.preventDefault();
+		try {
+			const post = await fetch(process.env.REACT_APP_URL + '/post/new', {
+				method: 'POST',
+				credentials: 'include',
+				body: JSON.stringify({
+					postTitle: this.state.postTitle,
+					postBody: this.state.postBody
+				}),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+
+			const parsedResponse = await post.json()
+			this.setState({
+				posts: [...this.state.posts, parsedResponse.data],
+				createPost: false
+			})
+		} catch(err) {
+			console.log(err)
+		}
 	}
+	handleChange = (e) => {
+	    this.setState({
+	      [e.currentTarget.name]: e.currentTarget.value
+	    })
+  	}
 	render() {
 		return (
 			<div>
 				<h1>Posts</h1>
+				<form onSubmit={this.newPost}>
+					<input name='postTitle' type='text' onChange={this.handleChange} />
+					<input name='postBody' type='textarea' onChange={this.handleChange} />
+					<button>submit</button>
+				</form>
 			</div>
 		)
 	}
