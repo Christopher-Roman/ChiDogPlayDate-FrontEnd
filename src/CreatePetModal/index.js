@@ -20,7 +20,7 @@ const customStyles = {
     bottom                : 'auto',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
-    backgroundColor		  : 'rgba(69,179,224)'
+    backgroundColor		    : '#455a64'
   }
 };
 
@@ -45,11 +45,7 @@ class CreatePetModal extends Component {
       const formData = new FormData();
       formData.append('petPhoto', this.state.selectedFile, this.state.selectedFile.name);
       formData.append('firstName', this.state.firstName);
-      await axios.post(process.env.REACT_APP_URL + '/pet/new', formData, { withCredentials: true }, {
-        onUploadProgress: progressEvent => {
-          console.log('Upload Progress: ' + Math.round((progressEvent.loaded / progressEvent.total) * 100) + '%')
-        }
-      })
+      await axios.post(process.env.REACT_APP_URL + '/pet/new', formData, { withCredentials: true })
     }
     handleSubmit = async (e) => {
       e.preventDefault();

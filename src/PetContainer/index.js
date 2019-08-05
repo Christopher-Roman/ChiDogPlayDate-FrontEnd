@@ -6,8 +6,6 @@ import EditPet from '../EditPet';
 
 require('../App.css');
 
-let isMounted = false;
-
 class PetContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -91,7 +89,6 @@ class PetContainer extends Component {
 		this.getPet().then(pet => {
 			if(pet.status === 200) {
 				let petArray = pet.data[0].pet
-				isMounted = true;
 				this.setState({
 					pets: petArray,
 					activePet: true,
@@ -103,23 +100,6 @@ class PetContainer extends Component {
 				})
 			}
 		})
-	}
-	componentDidUpdate(prevProps, prevState) {
-		if(isMounted) {
-			if(prevProps.pets !== prevState.pets) {
-				this.getPet().then(pet => {
-					if(pet.status === 200) {
-						let petArray = pet.data[0].pet
-						this.setState({
-							pets: petArray
-						})
-					}
-				})
-			}
-		}
-	}
-	componentWillUnmount() {
-		isMounted = false;
 	}
 	closeAddPetModal = () => {
 		this.setState({

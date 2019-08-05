@@ -6,7 +6,7 @@ require('../App.css');
 //Styles for Modal
 const customStyles = {
   content : {
-    backgroundColor: 'rgba(69,179,224)'
+    backgroundColor: '#455a64'
   }
 };
 

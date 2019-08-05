@@ -12,28 +12,25 @@ const Pets = (props) => {
 		let foundPets = props.petInfo;
 		const pets = foundPets.map((pet, i) => {
 			return (
-				<div className='photoThumbnail' key={i}>
-					<div className='petCard'>
-						<div className='petContainer'>
-							<label>{pet.firstName}</label>
-							<br/>
-							<br/>
-							<div >
-								<div>
-									<img alt='A users pet' className='petListPhoto' src={`${process.env.REACT_APP_URL}/${pet.petPhoto}`} />
-								</div>
+				<div className="row" key={i}>
+				    <div className="col s12 m7 l4">
+						<div className="card grey lighten-1 center-align">
+							<div className="card-image">
+								<img alt={pet.firstName} src={`${process.env.REACT_APP_URL}/${pet.petPhoto}`} />
 							</div>
-							<br/>
-							<button className='medPosBtns' onClick={props.viewPet.bind(null, pet)}>View</button>
-							<button className='medPosBtns' onClick={props.openAndEditPet.bind(null, pet)}>Edit</button>
-							<button className='medNegBtns' onClick={props.deletePet.bind(null, pet._id)}>Delete</button>
-						</div>
-					</div>
-				</div>
+							<span className="card-title blue-text text-darken-2">{pet.firstName}</span>
+							<div className="card-action">
+								<button className="btn-medium waves-effect waves-light blue darken-2" onClick={props.viewPet.bind(null, pet)}><i className="material-icons right">open_in_new</i>View</button> 
+								<button className="btn-medium waves-effect waves-light green darken-1 white" onClick={props.openAndEditPet.bind(null, pet)}><i className="material-icons right">mode_edit</i>Edit</button>
+								<button className="btn-medium waves-effect waves-light red accent-4" onClick={props.deletePet.bind(null, pet._id)}><i className="material-icons right">delete_forever</i></button>
+						 	</div>
+					  	</div>
+				  	</div>
+			  	</div>
 			)
 		})
 		return (
-			<div className='listContainer'>
+			<div>
 				{response}
 				<br/>
 				{pets}

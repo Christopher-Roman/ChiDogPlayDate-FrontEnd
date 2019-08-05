@@ -9,7 +9,7 @@ const customStyles = {
     bottom                : 'auto',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
-    backgroundColor		  : 'rgba(69,179,224)'
+    backgroundColor		  : '#455a64'
   }
 };
 

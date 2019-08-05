@@ -102,7 +102,7 @@ class UserContainer extends Component {
 		return (
 			<div>
 				<div className='profile-picture'>
-					{this.state.userPhoto ? <img src={`${process.env.REACT_APP_URL}/${this.state.userPhoto}`} /> : null}
+					{this.state.userPhoto ? <img alt='User' src={`${process.env.REACT_APP_URL}/${this.state.userPhoto}`} /> : null}
 				</div>
 				<br/>
 				<h1>Hello {this.state.username}</h1>

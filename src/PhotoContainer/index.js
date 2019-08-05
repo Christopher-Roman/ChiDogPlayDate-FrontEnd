@@ -79,8 +79,15 @@ class PhotoContainer extends Component {
 	newPhoto = async () => {
 		const formData = new FormData();
 		formData.append('photoUrl', this.state.selectedFile, this.state.selectedFile.name);
+		await axios.post(process.env.REACT_APP_URL + '/photo/new', formData, { withCredentials: true}).then((response) => {
+			if(response.status === 200) {
+				this.setState({
+					photos: [...response.data.data.photo],
+					addPhoto: false
+				})
+			}
+		})
 		formData.append('description', this.state.description);
-		await axios.post(process.env.REACT_APP_URL + '/photo/new', formData, { withCredentials: true})
 	}
 	handlePostSubmit = async (e) => {
 		e.preventDefault();
@@ -171,13 +178,13 @@ class PhotoContainer extends Component {
 	render() {
 		return (
 			<div>
+				<button onClick={this.addPhotoOpen} >Add a Photo</button>
+				<br/>
+				<br/>
 				{this.state.activePhoto ? <Photos userInfo={this.props.userInfo} photoInfo={this.state.photos} photoViewToggle={this.photoViewOpen} editPhotoOpen={this.editPhotoOpen} deletePhoto={this.deletePhoto} /> : null }
 				{this.state.addPhoto ? <CreatePhotoModal addPhotoOpen={this.addPhotoOpen} addPhotoClose={this.addPhotoClose} fileSelectHandler={this.fileSelectHandler} handleChange={this.handleChange} handlePostSubmit={this.handlePostSubmit} addPhoto={this.state.addPhoto} selectedFile={this.state.selectedFile} /> : null }
 				{this.state.viewPhoto ? <ViewPhoto userInfo={this.state} photoInfo={this.state.photos} photoToView={this.state.photoToView} viewPhoto={this.state.viewPhoto} photoViewClose={this.photoViewClose} /> : null}
 				{this.state.editPhoto ? <EditPhotoModal editPhotoOpen={this.editPhotoOpen} editPhotoClose={this.editPhotoClose} fileSelectHandler={this.fileSelectHandler} handlePhotoEditChange={this.handlePhotoEditChange} selectedFile={this.state.selectedFile} editPhoto={this.state.editPhoto} handlePutSubmit={this.handlePutSubmit} photoToEdit={this.state.photoToEdit} /> : null}
-				<br/>
-				<br/>
-				<button onClick={this.addPhotoOpen} >Add a Photo</button>
 			</div>
 		)
 	}

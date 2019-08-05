@@ -24,3 +24,35 @@
 .profile-picture img {
 	max-height: 300px;
 }
+
+body {
+	background: #90a4ae;
+}
+
+#logo {
+	font-size: 75px;
+	font-family: 'Lobster', cursive;
+	color: #fff;
+}
+
+span {
+	font-family: 'Lobster', cursive;
+}
+
+.responsive-img img {
+	padding-right: 30px;
+	padding-top: 5px;
+	padding-left: 15px;
+}
+
+.ReactModal__Overlay {
+    z-index: 1000;
+}
+
+.sidenav {
+	padding-left: 70px;
+	padding-top: 10px;
+}
+
+
+

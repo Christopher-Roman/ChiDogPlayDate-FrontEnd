@@ -6,6 +6,7 @@ import PetContainer from './PetContainer';
 import ParkContainer from './ParkContainer';
 import PhotoContainer from './PhotoContainer';
 import UserContainer from './UserContainer';
+import PostContainer from './PostContainer';
 import './App.css';
 
 let loginAttempt = 0
@@ -166,12 +167,18 @@ class App extends Component {
             <HeaderApp userInfo={this.state} handleLogout={this.handleLogout} viewPets={this.viewPets} viewPhotos={this.viewPhotos} viewPosts={this.viewPosts} viewUser={this.viewUser} viewMaps={this.viewMaps} />
           </div>
         <div>
-          {!this.state.loggedIn && !this.state.loginFail && !this.state.register ? <Login registration={this.register} handleChange={this.handleChange} handleSubmit={this.handleSubmit} /> : null }
-          {this.state.register || this.state.loginFail ? <Register haveAnAccount={this.haveAnAccount} loggedIn={this.loggedIn} register={this.register} userInfo={this.state} /> : null }
-          {this.state.pets && this.state.loggedIn ? <PetContainer handleChange={this.handleChange} userInfo={this.state} /> : null }
-          {this.state.maps && this.state.loggedIn ? <ParkContainer userInfo={this.state} /> : null}
-          {this.state.photos ? <PhotoContainer userInfo={this.state} /> : null}
-          {this.state.user ? <UserContainer userInfo={this.state} /> : null}
+          <div className='container'>
+            <br/>
+            <br/>
+            <br/>
+            {!this.state.loggedIn && !this.state.loginFail && !this.state.register ? <Login registration={this.register} handleChange={this.handleChange} handleSubmit={this.handleSubmit} /> : null }
+            {this.state.register || this.state.loginFail ? <Register haveAnAccount={this.haveAnAccount} loggedIn={this.loggedIn} register={this.register} userInfo={this.state} /> : null }
+            {this.state.pets && this.state.loggedIn ? <PetContainer handleChange={this.handleChange} userInfo={this.state} /> : null }
+            {this.state.maps && this.state.loggedIn ? <ParkContainer userInfo={this.state} /> : null}
+            {this.state.photos ? <PhotoContainer userInfo={this.state} /> : null}
+            {this.state.user ? <UserContainer userInfo={this.state} /> : null}
+            {this.state.posts ? <PostContainer userInfo={this.state} /> : null}
+          </div>
         </div>
       </div>
     )
