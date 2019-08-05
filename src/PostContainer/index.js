@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Posts from '../Posts'
 import axios from 'axios';
 
 require ('../App.css');
@@ -87,9 +88,10 @@ class PostContainer extends Component {
 				<h1>Posts</h1>
 				<form onSubmit={this.newPost}>
 					<input name='postTitle' type='text' onChange={this.handleChange} />
-					<input name='postBody' type='textarea' onChange={this.handleChange} />
+					<input name='postBody' type='text' onChange={this.handleChange} />
 					<button>submit</button>
 				</form>
+				<Posts postInfo={this.state.posts} userInfo={this.state.username} />
 			</div>
 		)
 	}
