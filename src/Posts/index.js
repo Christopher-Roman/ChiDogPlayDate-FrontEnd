@@ -13,10 +13,10 @@ const Posts = (props) => {
 			      <div className="card blue-grey darken-1">
 			        <div className="card-content white-text">
 			          <span className="card-title">{post.postTitle}</span>
-			          <p>{post.postBody}</p>
+			          <p className='truncate'>{post.postBody}</p>
 			        </div>
 			        <div className="card-action">
-			          <a href="#">This is a link</a>
+			          <button className='btn-flat waves-effect waves-light red accent-4' onClick={props.deletePost.bind(null, post._id)}>Delete</button>
 			          <a href="#">This is a link</a>
 			        </div>
 			      </div>

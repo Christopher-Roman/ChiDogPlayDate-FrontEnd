@@ -50,9 +50,11 @@ span {
 }
 
 .sidenav {
-	padding-left: 70px;
 	padding-top: 10px;
 }
 
-
+.nav-message {
+	font-family: 'Lobster', cursive;
+	padding: 25px;
+}
 

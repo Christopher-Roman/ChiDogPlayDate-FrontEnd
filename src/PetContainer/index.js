@@ -187,11 +187,11 @@ class PetContainer extends Component {
 	render(){
 		return (
 			<div>
+				<button className='newPet' onClick={this.openAddPetModal}>Add a Pet?</button>
 				<Pets userInfo={this.props.userInfo} petInfo={this.state.pets} viewPet={this.petViewToggle} openAndEditPet={this.openAndEditPet} petViewModal={this.state.petViewModal} deletePet={this.deletePet} />
 				<br/>
 				<br/>
 				<br/>
-				<button className='newPet' onClick={this.openAddPetModal}>Add a Pet?</button>
 				{this.state.addPet ? <CreatePetModal getPet={this.getPet} closeAddPet={this.closeAddPetModal} openAddPet={this.openAddPetModal} pets={this.state.pets} addPet={this.state.addPet} /> : null}
 				{this.state.petViewModal ? <ViewPet petViewToggle={this.petViewToggle} petToView={this.state.petToView} petViewModal={this.state.petViewModal} /> : null }
 				{this.state.editPetModal ? <EditPet getPet={this.getPet} fileSelectHandler={this.fileSelectHandler} handlePetToEditChange={this.handlePetEditChange} closeEditPetModal={this.closeEditPetModal} petToEdit={this.state.petToEdit} editPetModal={this.state.editPetModal} handleSubmit={this.handleSubmit} selectedFile={this.state.selectedFile} /> : null}

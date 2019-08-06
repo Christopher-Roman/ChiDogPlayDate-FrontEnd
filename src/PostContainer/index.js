@@ -77,6 +77,25 @@ class PostContainer extends Component {
 			console.log(err)
 		}
 	}
+	deletePost = async (id) => {
+		try {
+			const deletePost = await fetch(process.env.REACT_APP_URL + '/post/delete/' + id, {
+				method: 'DELETE',
+				credentials: 'include',
+				headers: {
+					'Content-Type':'application/json'
+				}
+			})
+			const parsedResponse = await deletePost.json();
+			let remainingPosts = parsedResponse.data.post
+			console.log(remainingPosts);
+			this.setState({
+				posts: remainingPosts
+			})
+		} catch(err) {
+			console.log(err)
+		}
+	}
 	handleChange = (e) => {
 	    this.setState({
 	      [e.currentTarget.name]: e.currentTarget.value
@@ -91,7 +110,7 @@ class PostContainer extends Component {
 					<input name='postBody' type='text' onChange={this.handleChange} />
 					<button>submit</button>
 				</form>
-				<Posts postInfo={this.state.posts} userInfo={this.state.username} />
+				<Posts deletePost={this.deletePost} postInfo={this.state.posts} userInfo={this.state.username} />
 			</div>
 		)
 	}
