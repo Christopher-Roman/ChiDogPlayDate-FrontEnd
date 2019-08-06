@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Posts from '../Posts'
+import ViewPost from '../ViewPost'
 import axios from 'axios';
 
 require ('../App.css');
@@ -77,6 +78,36 @@ class PostContainer extends Component {
 			console.log(err)
 		}
 	}
+	viewPost = async (post) => {
+		try {
+			const selectedPost = await fetch(process.env.REACT_APP_URL + '/post/' + post._id, {
+				method: 'GET',
+				credentials: 'include',
+				headers: {
+					'Content-Type':'application/json'
+				}
+			})
+			const parsedResponse = await selectedPost.json();
+			return parsedResponse
+
+		} catch(err) {
+			console.log(err)
+		}
+	}
+	viewPostToggle = (post) => {
+		if(!this.state.viewPost) {
+			this.setState({
+				viewPost: true,
+				postToView: {
+					...post
+				}
+			})
+		} else {
+			this.setState({
+				viewPost: false
+			})
+		}
+	}
 	deletePost = async (id) => {
 		try {
 			const deletePost = await fetch(process.env.REACT_APP_URL + '/post/delete/' + id, {
@@ -110,7 +141,7 @@ class PostContainer extends Component {
 					<input name='postBody' type='text' onChange={this.handleChange} />
 					<button>submit</button>
 				</form>
-				<Posts deletePost={this.deletePost} postInfo={this.state.posts} userInfo={this.state.username} />
+				{!this.state.viewPost ? <Posts openPost={this.viewPostToggle} deletePost={this.deletePost} postInfo={this.state.posts} userInfo={this.state.username} /> : <ViewPost closePost={this.viewPostToggle} postToView={this.state.postToView} /> }
 			</div>
 		)
 	}

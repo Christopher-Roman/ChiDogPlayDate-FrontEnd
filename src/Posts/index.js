@@ -16,8 +16,8 @@ const Posts = (props) => {
 			          <p className='truncate'>{post.postBody}</p>
 			        </div>
 			        <div className="card-action">
-			          <button className='btn-flat waves-effect waves-light red accent-4' onClick={props.deletePost.bind(null, post._id)}>Delete</button>
-			          <a href="#">This is a link</a>
+			          <button className='btn-flat waves-effect waves-light' onClick={props.openPost.bind(null, post)}>View</button>
+			          <button className='btn-flat waves-effect waves-light' onClick={props.deletePost.bind(null, post._id)}>Delete</button>
 			        </div>
 			      </div>
 			    </div>
