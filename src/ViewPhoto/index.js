@@ -12,7 +12,7 @@ const customStyles = {
   }
 };
 
-// Allows Accessibility Reading
+// Allows Accessibility Reading for Modal
 Modal.setAppElement('#root')
 
 class ViewPhoto extends Component {
