@@ -32,7 +32,7 @@ const ViewPost = (props) => {
 			          <p>{props.postToView.postBody}</p>
 			        </div>
 			        <div className="card-action">
-			          <button className='btn-flat waves-effect waves-light red accent-4' onClick={props.closePost}>Close</button>
+			          <button className='btn-flat waves-effect waves-light' onClick={props.closePost}>Close</button>
 			          <a href="#">This is a link</a>
 			        </div>
 		        </div>
