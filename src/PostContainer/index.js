@@ -141,7 +141,7 @@ class PostContainer extends Component {
 					<input name='postBody' type='text' onChange={this.handleChange} />
 					<button>submit</button>
 				</form>
-				{!this.state.viewPost ? <Posts openPost={this.viewPostToggle} deletePost={this.deletePost} postInfo={this.state.posts} userInfo={this.state.username} /> : <ViewPost closePost={this.viewPostToggle} postToView={this.state.postToView} /> }
+				{!this.state.viewPost ? <Posts openPost={this.viewPostToggle} deletePost={this.deletePost} postInfo={this.state.posts} userInfo={this.props.userInfo} /> : <ViewPost closePost={this.viewPostToggle} postToView={this.state.postToView} /> }
 			</div>
 		)
 	}

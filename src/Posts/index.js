@@ -4,7 +4,7 @@ require('../App.css');
 const Posts = (props) => {
 	let response = null;
 	if(props.postInfo.length <= 0) {
-		response = <p>{props.userInfo}, what's on your mind?</p>
+		response = <p>{props.userInfo.username}, what's on your mind?</p>
 		return response
 	} else {
 		const posts = props.postInfo.map((post, i) => {
