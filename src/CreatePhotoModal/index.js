@@ -51,7 +51,7 @@ class CreatePhotoModal extends Component {
 		            <input type="file" name="photoUrl" onChange={this.props.fileSelectHandler} ref={fileInput => this.fileInput = fileInput} />
 	            <button>Submit</button>
 	        	</form>
-	        	<button onClick={this.props.closeAddPet}>close</button>
+	        	<button onClick={this.props.addPhotoClose}>close</button>
 	        </Modal>
 	    )
 	}
