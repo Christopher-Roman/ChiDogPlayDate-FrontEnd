@@ -17,6 +17,7 @@ const Posts = (props) => {
 			        </div>
 			        <div className="card-action">
 			          <button className='btn-flat waves-effect waves-light' onClick={props.openPost.bind(null, post)}>View</button>
+			          <button className='btn-flat waves-effect waves-light' onClick={props.editPostOpen.bind(null, post)}>Edit</button>
 			          <button className='btn-flat waves-effect waves-light' onClick={props.deletePost.bind(null, post._id)}>Delete</button>
 			        </div>
 			      </div>

@@ -2,23 +2,29 @@ import React from 'react';
 require('../App.css');
 
 const ViewPost = (props) => {
+	let response = null;
 	let foundComments = props.postToView.comment
-	const comments = foundComments.map((comment) => {
-		return (
-			<div key={comment._id} className="col s12 m7 l4">
-				<div class="card blue-grey darken-1">
-			        <div class="card-content white-text">
-			          <span class="card-title">{comment.createdBy}</span>
-			          <p>{comment.commentBody}</p>
-			        </div>
-			        <div class="card-action">
-			          <a href="#">This is a link</a>
-			          <a href="#">This is a link</a>
-			        </div>
-			    </div>
-			</div>
-		)
-	})
+	if(!foundComments) {
+		response = <p>{props.userInfo.username}, what's on your mind?</p>
+		return response
+	} else {
+		const comments = foundComments.map((comment) => {
+			return (
+				<div key={comment._id} className="col s12 m7 l4">
+					<div class="card blue-grey darken-1">
+				        <div class="card-content white-text">
+				          <span class="card-title">{comment.createdBy}</span>
+				          <p>{comment.commentBody}</p>
+				        </div>
+				        <div class="card-action">
+				          <a href="#">This is a link</a>
+				          <a href="#">This is a link</a>
+				        </div>
+				    </div>
+				</div>
+			)
+		})
+	}
 	return (
 		<div className='container'>
 			<div className="col s12 m6 l12">
@@ -37,8 +43,8 @@ const ViewPost = (props) => {
 			        </div>
 		        </div>
 		    </div>
+		    	{response}
 			<div className='row'>
-				{comments}
 			</div>
 		</div>
 	)
