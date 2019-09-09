@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-require('../App.css')
+require('../../App.css')
 
 
 

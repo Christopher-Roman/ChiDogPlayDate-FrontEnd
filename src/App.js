@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import HeaderApp from './HeaderApp';
-import Login from './Login';
-import Register from './Register';
+import Login from './AuthContainer/Login';
+import Register from './AuthContainer/Register';
 import PetContainer from './PetContainer';
 import ParkContainer from './ParkContainer';
 import PhotoContainer from './PhotoContainer';
