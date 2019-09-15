@@ -1,5 +1,5 @@
 import React from 'react';
-require('../App.css');
+require('../../App.css');
 
 const Posts = (props) => {
 	let response = null;

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import CreatePhotoModal from '../CreatePhotoModal';
-import EditPhotoModal from '../EditPhotoModal';
-import Photos from '../Photos'
-import ViewPhoto from '../ViewPhoto'
+import CreatePhotoModal from './CreatePhotoModal';
+import EditPhotoModal from './EditPhotoModal';
+import Photos from './Photos'
+import ViewPhoto from './ViewPhoto'
 import axios from 'axios';
 
 require('../App.css');

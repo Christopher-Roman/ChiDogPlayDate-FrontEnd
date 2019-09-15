@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Pets from '../Pets';
-import CreatePetModal from '../CreatePetModal';
-import ViewPet from '../ViewPet';
-import EditPet from '../EditPet';
+import Pets from './Pets';
+import CreatePetModal from './CreatePetModal';
+import ViewPet from './ViewPet';
+import EditPet from './EditPet';
 
 require('../App.css');
 
@@ -188,7 +188,7 @@ class PetContainer extends Component {
 		return (
 			<div>
 				<button className='newPet' onClick={this.openAddPetModal}>Add a Pet?</button>
-				<Pets userInfo={this.props.userInfo} petInfo={this.state.pets} viewPet={this.petViewToggle} openAndEditPet={this.openAndEditPet} petViewModal={this.state.petViewModal} deletePet={this.deletePet} />
+				{!this.state.petViewModal ? <Pets userInfo={this.props.userInfo} petInfo={this.state.pets} viewPet={this.petViewToggle} openAndEditPet={this.openAndEditPet} petViewModal={this.state.petViewModal} deletePet={this.deletePet} /> : null }
 				<br/>
 				<br/>
 				<br/>

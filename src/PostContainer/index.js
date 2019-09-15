@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Posts from '../Posts'
-import ViewPost from '../ViewPost'
-import EditPost from '../EditPost'
+import Posts from './Posts'
+import ViewPost from './ViewPost'
+import EditPost from './EditPost'
 import axios from 'axios';
 
 require ('../App.css');

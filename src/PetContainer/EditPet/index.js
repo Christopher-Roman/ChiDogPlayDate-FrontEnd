@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 
-require('../App.css');
+require('../../App.css');
 
 
 //Styles for Modal
