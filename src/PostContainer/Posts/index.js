@@ -9,7 +9,7 @@ const Posts = (props) => {
 	} else {
 		const posts = props.postInfo.map((post, i) => {
 			return (
-			    <div className="col s12 m6" key={i}>
+			    <div className="" key={i}>
 			      <div className="card blue-grey darken-1">
 			        <div className="card-content white-text">
 			          <span className="card-title">{post.postTitle}</span>

@@ -160,20 +160,25 @@ class PostContainer extends Component {
   	}
 	render() {
 		return (
-			<div>
-				<h1>Posts</h1>
-				{!this.state.editPost && !this.state.viewPost ?
-					<form onSubmit={this.newPost}>
-						<input name='postTitle' type='text' onChange={this.handleChange} />
-						<input name='postBody' type='text' onChange={this.handleChange} />
-						<button>submit</button>
-					</form> 
-				: null}
-				{this.state.activePosts && !this.state.editPost && !this.state.viewPost ? 
-					<Posts postInfo={this.state.posts} editPostOpen={this.editPostOpen} openPost={this.viewPostToggle} deletePost={this.deletePost} postInfo={this.state.posts} userInfo={this.props.userInfo} /> 
-					: !this.state.activePosts && this.state.viewPost && !this.state.editPost ? <ViewPost userInfo={this.props.userInfo} closePost={this.viewPostToggle} postToView={this.state.postToView} /> 
-					: this.state.editPost && !this.state.activePosts && !this.state.viewPost ? <EditPost userInfo={this.props.userInfo} postToView={this.state.postToEdit} handlePostEditChange={this.handlePostEditChange} postClose={this.editPostClose} postInfo={this.state.posts} /> 
-					: null }
+			<div className="post_container">
+				<div className="user_posts">
+					<h1>Your Posts</h1>
+					{!this.state.editPost && !this.state.viewPost ?
+						<form onSubmit={this.newPost}>
+							<input name='postTitle' type='text' onChange={this.handleChange} />
+							<input name='postBody' type='text' onChange={this.handleChange} />
+							<button>submit</button>
+						</form> 
+					: null}
+					{this.state.activePosts && !this.state.editPost && !this.state.viewPost ? 
+						<Posts postInfo={this.state.posts} editPostOpen={this.editPostOpen} openPost={this.viewPostToggle} deletePost={this.deletePost} postInfo={this.state.posts} userInfo={this.props.userInfo} /> 
+						: !this.state.activePosts && this.state.viewPost && !this.state.editPost ? <ViewPost userInfo={this.props.userInfo} closePost={this.viewPostToggle} postToView={this.state.postToView} /> 
+						: this.state.editPost && !this.state.activePosts && !this.state.viewPost ? <EditPost userInfo={this.props.userInfo} postToView={this.state.postToEdit} handlePostEditChange={this.handlePostEditChange} postClose={this.editPostClose} postInfo={this.state.posts} /> 
+						: null }
+				</div>
+				<div className="global_posts">
+					<h1>This is where all other user posts will go</h1>
+				</div>
 			</div>
 		)
 	}

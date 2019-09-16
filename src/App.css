@@ -58,3 +58,20 @@ span {
 	padding: 25px;
 }
 
+
+.post_container {
+	display: inline-flex;
+	justify-content: space-between;
+}
+
+.user_posts {
+	width: 30%;
+	padding-left: 0;
+	background: #78909c;
+	align-content: center;
+}
+
+.global_posts {
+	width: 60%;
+	padding-right: 0;
+}
