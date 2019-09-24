@@ -67,11 +67,11 @@ span {
 .user_posts {
 	width: 30%;
 	padding-left: 0;
-	background: #78909c;
 	align-content: center;
 }
 
 .global_posts {
 	width: 60%;
 	padding-right: 0;
+	background: #78909c;
 }
