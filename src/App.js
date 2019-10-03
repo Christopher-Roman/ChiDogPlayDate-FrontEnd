@@ -180,7 +180,7 @@ class App extends Component {
             {this.state.register || this.state.loginFail ? <Register setUser={this.setUser} haveAnAccount={this.haveAnAccount} loggedIn={this.loggedIn} register={this.register} userInfo={this.state} /> : null }
             {this.state.pets && this.state.loggedIn ? <PetContainer handleChange={this.handleChange} userInfo={this.state} /> : null }
             {this.state.maps && this.state.loggedIn ? <ParkContainer userInfo={this.state} /> : null}
-            {this.state.photos ? <PhotoContainer userInfo={this.state} /> : null}
+            {this.state.photos ? <PhotoContainer userInfo={this.state.username} /> : null}
             {this.state.user ? <UserContainer userInfo={this.state} /> : null}
             {this.state.posts ? <PostContainer userInfo={this.state} /> : null}
           </div>

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Posts from './Posts'
+import UserPosts from './UserPosts'
 import ViewPost from './ViewPost'
 import EditPost from './EditPost'
+import OtherPosts from './OtherPosts'
 import axios from 'axios';
 
 require ('../App.css');
@@ -10,7 +11,7 @@ class PostContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			username: '',
+			username: props.userInfo.username,
 			postTitle: '',
 			postBody: '',
 			posts: [],
@@ -43,11 +44,10 @@ class PostContainer extends Component {
 	componentDidMount() {
 		this.getPosts().then(post => {
 			if(post.status === 200) {
-				let postArray = post.data[0].post
-				console.log(postArray);
+				let allPosts = post.data
+				console.log(allPosts);
 				this.setState({
-					posts: postArray,
-					username: post.data.username,
+					posts: allPosts,
 					activePosts: true
 				})
 			} else {
@@ -171,13 +171,14 @@ class PostContainer extends Component {
 						</form> 
 					: null}
 					{this.state.activePosts && !this.state.editPost && !this.state.viewPost ? 
-						<Posts postInfo={this.state.posts} editPostOpen={this.editPostOpen} openPost={this.viewPostToggle} deletePost={this.deletePost} postInfo={this.state.posts} userInfo={this.props.userInfo} /> 
+						<UserPosts postInfo={this.state.posts} editPostOpen={this.editPostOpen} openPost={this.viewPostToggle} deletePost={this.deletePost} postInfo={this.state.posts} userInfo={this.state.username} /> 
 						: !this.state.activePosts && this.state.viewPost && !this.state.editPost ? <ViewPost userInfo={this.props.userInfo} closePost={this.viewPostToggle} postToView={this.state.postToView} /> 
 						: this.state.editPost && !this.state.activePosts && !this.state.viewPost ? <EditPost userInfo={this.props.userInfo} postToView={this.state.postToEdit} handlePostEditChange={this.handlePostEditChange} postClose={this.editPostClose} postInfo={this.state.posts} /> 
 						: null }
 				</div>
 				<div className="global_posts">
-					<h1>This is where all other user posts will go</h1>
+					<h1>What is going on in the community?</h1>
+					<OtherPosts postInfo={this.state.posts} userInfo={this.state.username}/>
 				</div>
 			</div>
 		)
