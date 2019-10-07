@@ -42,7 +42,14 @@ class App extends Component {
       if(logoutRequestParsed.status === 200) {
         this.setState({
           loggedIn: false,
-          loginFail: false
+          loginFail: false,
+          pets: false,
+          photos: false,
+          posts: false,
+          user: false,
+          maps: false,
+          register: false,
+          confirmed: false
         });
       } else {
         console.log('Logout Request Error -- ', logoutRequestParsed.error);

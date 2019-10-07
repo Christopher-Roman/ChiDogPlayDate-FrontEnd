@@ -2,6 +2,7 @@ import React from 'react';
 require('../../App.css');
 
 const OtherPosts = (props) => {
+	console.log(props.postInfo);
 	let response = null;
 	if(props.postInfo.length <= 0) {
 		response = <p>{props.userInfo.username}, what's on your mind?</p>
