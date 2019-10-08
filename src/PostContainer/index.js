@@ -173,16 +173,22 @@ class PostContainer extends Component {
 							</form> 
 						</div>
 					: null}
-					<h1 className='post_headers'>Your Posts</h1>
-					{this.state.activePosts && !this.state.editPost && !this.state.viewPost ? 
-						<UserPosts postInfo={this.state.posts} editPostOpen={this.editPostOpen} openPost={this.viewPostToggle} deletePost={this.deletePost} postInfo={this.state.posts} userInfo={this.state.username} /> 
+					{this.state.activePosts && !this.state.editPost && !this.state.viewPost ?
+						<div> 
+						<h1 className='post_headers'>Your Posts</h1>
+						<UserPosts postInfo={this.state.posts} editPostOpen={this.editPostOpen} openPost={this.viewPostToggle} deletePost={this.deletePost} postInfo={this.state.posts} userInfo={this.state.username} />
+						</div> 
 						: !this.state.activePosts && this.state.viewPost && !this.state.editPost ? <ViewPost userInfo={this.props.userInfo} closePost={this.viewPostToggle} postToView={this.state.postToView} /> 
 						: this.state.editPost && !this.state.activePosts && !this.state.viewPost ? <EditPost userInfo={this.props.userInfo} postToView={this.state.postToEdit} handlePostEditChange={this.handlePostEditChange} postClose={this.editPostClose} postInfo={this.state.posts} /> 
 						: null }
 				</div>
 				<div className="global_posts">
+					{this.state.activePosts && !this.state.editPost && !this.state.viewPost ? 
+					<div>
 					<h1 className='post_headers'>What's everyone up to?</h1>
-					<OtherPosts postInfo={this.state.posts} userInfo={this.state.username}/>
+					<OtherPosts postInfo={this.state.posts} userInfo={this.state.username} openPost={this.viewPostToggle} />
+					</div>
+					: null }
 				</div>
 			</div>
 		)

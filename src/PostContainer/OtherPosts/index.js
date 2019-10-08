@@ -22,6 +22,9 @@ const OtherPosts = (props) => {
 			          <span className="card-title">{post.postTitle}</span>
 			          <p className='truncate'>{post.postBody}</p>
 			        </div>
+			        <div className="card-action">
+			          <button className='btn-flat waves-effect waves-light' onClick={props.openPost.bind(null, post)}>View</button>
+			        </div>
 			      </div>
 			    </div>
 			)
