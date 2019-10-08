@@ -3,12 +3,17 @@ require('../../App.css');
 
 const UserPosts = (props) => {
 	let response = null;
-	if(props.postInfo.length <= 0) {
-		response = <p>{props.userInfo.username}, what's on your mind?</p>
+	let userOnly = []
+	const userPosts = props.postInfo.forEach(post => {
+		if(post.createdBy === props.userInfo) {
+			userOnly.push(post)
+		}
+	})
+	if(userOnly.length <= 0) {
+		response = <p>{props.userInfo}, what's on your mind?</p>
 		return response
 	} else {
-		const userPosts = props.postInfo.filter(post => post.createdBy !== props.userinfo)
-		const posts = userPosts.map((post, i) => {
+		const posts = userOnly.map((post, i) => {
 			return (
 			    <div className="" key={i}>
 			      <div className="card blue-grey darken-1">

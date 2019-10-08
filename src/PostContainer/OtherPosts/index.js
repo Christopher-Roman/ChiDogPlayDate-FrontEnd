@@ -2,14 +2,19 @@ import React from 'react';
 require('../../App.css');
 
 const OtherPosts = (props) => {
-	console.log(props.postInfo);
-	let response = null;
-	if(props.postInfo.length <= 0) {
-		response = <p>{props.userInfo.username}, what's on your mind?</p>
-		return response
+	let globalResponse = null;
+	let globalOnly = []
+	const globalPosts = props.postInfo.forEach(post => {
+		if(post.createdBy !== props.userInfo) {
+			globalOnly.push(post)
+		}
+	})
+	console.log(globalOnly);
+	if(globalOnly.length <= 0) {
+		globalResponse = <p>{props.userInfo.username}, what's on your mind?</p>
+		return globalResponse
 	} else {
-		const otherPosts = props.postInfo.filter(post => post.createdBy === props.userinfo)
-		const posts = otherPosts.map((post, i) => {
+		const posts = globalOnly.map((post, i) => {
 			return (
 			    <div className="" key={i}>
 			      <div className="card blue-grey darken-1">
@@ -23,7 +28,7 @@ const OtherPosts = (props) => {
 		})
 		return (
 			<div className='row'>
-			{response}
+			{globalResponse}
 			<br/>
 			{posts}
 			<br/>
