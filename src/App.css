@@ -1,3 +1,10 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	overflow: hidden;
+}
+
 .photoThumbnail img {
   max-width: 200px;
 }
@@ -64,14 +71,32 @@ span {
 	justify-content: space-between;
 }
 
+.user_posts, .global_posts {
+	overflow-y: scroll;
+}
+
 .user_posts {
-	width: 30%;
-	padding-left: 0;
-	align-content: center;
+	position: absolute;
+    left: 20px;
+    top: 10%;
+    right: 10%;
+    width: 40%;
+    height: 100%;
 }
 
 .global_posts {
-	width: 60%;
-	padding-right: 0;
-	background: #78909c;
+	position: absolute;
+    left: 45%;
+    top: 27.5%;
+    right: 10px;
+    float: right;
+    width: 50%;
+}
+
+.post_headers {
+	font-family: 'Lobster', cursive;
+}
+
+.new_post {
+	background-color: #546e7a;
 }

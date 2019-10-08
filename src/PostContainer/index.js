@@ -162,14 +162,18 @@ class PostContainer extends Component {
 		return (
 			<div className="post_container">
 				<div className="user_posts">
-					<h1>Your Posts</h1>
 					{!this.state.editPost && !this.state.viewPost ?
-						<form onSubmit={this.newPost}>
-							<input name='postTitle' type='text' onChange={this.handleChange} />
-							<input name='postBody' type='text' onChange={this.handleChange} />
-							<button>submit</button>
-						</form> 
+						<div className='new_post'>
+							<form className='post_form' onSubmit={this.newPost}>
+								<label>Post Title</label>
+								<input name='postTitle' type='text' onChange={this.handleChange} />
+								<label>Post Body</label>
+								<input name='postBody' type='text' onChange={this.handleChange} />
+								<button>submit</button>
+							</form> 
+						</div>
 					: null}
+					<h1 className='post_headers'>Your Posts</h1>
 					{this.state.activePosts && !this.state.editPost && !this.state.viewPost ? 
 						<UserPosts postInfo={this.state.posts} editPostOpen={this.editPostOpen} openPost={this.viewPostToggle} deletePost={this.deletePost} postInfo={this.state.posts} userInfo={this.state.username} /> 
 						: !this.state.activePosts && this.state.viewPost && !this.state.editPost ? <ViewPost userInfo={this.props.userInfo} closePost={this.viewPostToggle} postToView={this.state.postToView} /> 
@@ -177,7 +181,7 @@ class PostContainer extends Component {
 						: null }
 				</div>
 				<div className="global_posts">
-					<h1>What is going on in the community?</h1>
+					<h1 className='post_headers'>What's everyone up to?</h1>
 					<OtherPosts postInfo={this.state.posts} userInfo={this.state.username}/>
 				</div>
 			</div>
