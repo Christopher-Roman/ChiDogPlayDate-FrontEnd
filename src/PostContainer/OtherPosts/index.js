@@ -17,8 +17,8 @@ const OtherPosts = (props) => {
 		const posts = globalOnly.map((post, i) => {
 			return (
 			    <div className="" key={i}>
-			      <div className="card blue-grey darken-1">
-			        <div className="card-content white-text">
+			      <div className="card grey lighten-1">
+			        <div className="card-content blue-text text-darken-2">
 			          <span className="card-title">{post.postTitle}</span>
 			          <p className='truncate'>{post.postBody}</p>
 			        </div>

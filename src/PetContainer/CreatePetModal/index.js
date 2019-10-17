@@ -31,32 +31,8 @@ class CreatePetModal extends Component {
   constructor(props) {
     super();
     this.state = {
-      firstName: '',
-      selectedFile: null,
-      uploadProgress: ''
+      selectedFile: null
     }
-  }
-  fileSelectHandler = (e) => {
-    this.setState({
-        selectedFile: e.target.files[0]
-    });
-  }
-  fileUploadHandler = async () => {
-      const formData = new FormData();
-      formData.append('petPhoto', this.state.selectedFile, this.state.selectedFile.name);
-      formData.append('firstName', this.state.firstName);
-      await axios.post(process.env.REACT_APP_URL + '/pet/new', formData, { withCredentials: true })
-    }
-    handleSubmit = async (e) => {
-      e.preventDefault();
-      this.fileUploadHandler();
-      this.props.closeAddPet();
-      this.props.getPet();
-    }
-    handleChange = (e) => {
-    this.setState({
-      [e.currentTarget.name]: e.currentTarget.value
-    })
   }
   render() {
   	return (
@@ -66,15 +42,14 @@ class CreatePetModal extends Component {
   			onRequestClose={this.props.closeAddPet}>
             	<div>Add a pet!</div>
             	<br/>
-            	<form onSubmit={this.handleSubmit}>
+            	<form onSubmit={this.props.handleSubmit}>
             		<label>Pet Name</label>
             		<br/>
-  	            <input name='firstName' type='text' onChange={this.handleChange} />
+  	            <input name='firstName' type='text' onChange={this.props.handleChange} />
   	            <br/>
   	            <label>Pet Photo</label>
   	            <br/>
-  	            <input type="file" name="petPhoto" onChange={this.fileSelectHandler} ref={fileInput => this.fileInput = fileInput} />
-                <h3>{ this.state.uploadProgress }</h3>
+  	            <input type="file" name="petPhoto" onChange={this.props.fileSelectHandler} ref={fileInput => this.fileInput = fileInput} />
                 <button>Submit</button>
             	</form>
             	<button onClick={this.props.closeAddPet}>close</button>

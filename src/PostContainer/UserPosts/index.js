@@ -16,15 +16,15 @@ const UserPosts = (props) => {
 		const posts = userOnly.map((post, i) => {
 			return (
 			    <div className="" key={i}>
-			      <div className="card blue-grey darken-1">
-			        <div className="card-content white-text">
+			      <div className="card grey lighten-1">
+			        <div className="card-content blue-text text-darken-2">
 			          <span className="card-title">{post.postTitle}</span>
 			          <p className='truncate'>{post.postBody}</p>
 			        </div>
 			        <div className="card-action">
-			          <button className='btn-flat waves-effect waves-light' onClick={props.openPost.bind(null, post)}>View</button>
-			          <button className='btn-flat waves-effect waves-light' onClick={props.editPostOpen.bind(null, post)}>Edit</button>
-			          <button className='btn-flat waves-effect waves-light' onClick={props.deletePost.bind(null, post._id)}>Delete</button>
+			          <button className='btn-flat waves-effect waves-light blue-text text-darken-2' onClick={props.openPost.bind(null, post)}>View</button>
+			          <button className='btn-flat waves-effect waves-light blue-text text-darken-2' onClick={props.editPostOpen.bind(null, post)}>Edit</button>
+			          <button className='btn-flat waves-effect waves-light blue-text text-darken-2' onClick={props.deletePost.bind(null, post._id)}>Delete</button>
 			        </div>
 			      </div>
 			    </div>

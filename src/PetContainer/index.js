@@ -3,6 +3,7 @@ import Pets from './Pets';
 import CreatePetModal from './CreatePetModal';
 import ViewPet from './ViewPet';
 import EditPet from './EditPet';
+import axios from 'axios';
 
 require('../App.css');
 
@@ -101,6 +102,23 @@ class PetContainer extends Component {
 			}
 		})
 	}
+  	fileUploadHandler = async () => {
+      const formData = new FormData();
+      formData.append('petPhoto', this.state.selectedFile, this.state.selectedFile.name);
+      formData.append('firstName', this.state.firstName);
+      await axios.post(process.env.REACT_APP_URL + '/pet/new', formData, { withCredentials: true }).then(response => {
+      	if(response.status === 200) {
+      		this.setState({
+      			pets: [...response.data.data.pet],
+      			addPet: false
+      		})
+      	}
+      })
+    }
+    handleSubmit = async (e) => {
+      e.preventDefault();
+      this.fileUploadHandler();
+    }
 	closeAddPetModal = () => {
 		this.setState({
 			addPet: false
@@ -184,15 +202,25 @@ class PetContainer extends Component {
 			}
 		})
 	}
+    handleChange = (e) => {
+	   this.setState({
+	     [e.currentTarget.name]: e.currentTarget.value
+	   });
+	}
+ 	fileSelectHandler = (e) => {
+    	this.setState({
+        	selectedFile: e.target.files[0]
+   		});
+  	}
 	render(){
 		return (
 			<div>
-				<button className='newPet' onClick={this.openAddPetModal}>Add a Pet?</button>
+				<button className='btn-large grey lighten-1 blue-text text-darken-2 center-align' onClick={this.openAddPetModal}><i className="large material-icons right">pets</i>Add a Pet?</button>
 				{!this.state.petViewModal ? <Pets userInfo={this.props.userInfo} petInfo={this.state.pets} viewPet={this.petViewToggle} openAndEditPet={this.openAndEditPet} petViewModal={this.state.petViewModal} deletePet={this.deletePet} /> : null }
 				<br/>
 				<br/>
 				<br/>
-				{this.state.addPet ? <CreatePetModal getPet={this.getPet} closeAddPet={this.closeAddPetModal} openAddPet={this.openAddPetModal} pets={this.state.pets} addPet={this.state.addPet} /> : null}
+				{this.state.addPet ? <CreatePetModal handleChange={this.handleChange} fileSelectHandler={this.fileSelectHandler} handleSubmit={this.handleSubmit} fileUploadHandler={this.fileUploadHandler} getPet={this.getPet} closeAddPet={this.closeAddPetModal} openAddPet={this.openAddPetModal} pets={this.state.pets} addPet={this.state.addPet} /> : null}
 				{this.state.petViewModal ? <ViewPet petViewToggle={this.petViewToggle} petToView={this.state.petToView} petViewModal={this.state.petViewModal} /> : null }
 				{this.state.editPetModal ? <EditPet getPet={this.getPet} fileSelectHandler={this.fileSelectHandler} handlePetToEditChange={this.handlePetEditChange} closeEditPetModal={this.closeEditPetModal} petToEdit={this.state.petToEdit} editPetModal={this.state.editPetModal} handleSubmit={this.handleSubmit} selectedFile={this.state.selectedFile} /> : null}
 			</div>

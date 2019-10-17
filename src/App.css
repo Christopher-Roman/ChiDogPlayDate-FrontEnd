@@ -71,32 +71,41 @@ span {
 	justify-content: space-between;
 }
 
-.user_posts, .global_posts {
+#user_posts, #global_posts {
 	overflow-y: scroll;
 }
 
-.user_posts {
+#user_posts {
 	position: absolute;
-    left: 20px;
-    top: 10%;
+    left: 75px;
+    top: 27.5%;
     right: 10%;
-    width: 40%;
-    height: 100%;
+    width: 30%;
+    max-height: 70%;
 }
 
-.global_posts {
+#global_posts {
 	position: absolute;
-    left: 45%;
+    left: 40%;
     top: 27.5%;
     right: 10px;
     float: right;
     width: 50%;
+    max-height: 70%;
 }
 
 .post_headers {
 	font-family: 'Lobster', cursive;
+	color: #1976d2;
 }
 
 .new_post {
 	background-color: #546e7a;
 }
+
+.new_post_button {
+	position: absolute;
+	float: left;
+}
+
+

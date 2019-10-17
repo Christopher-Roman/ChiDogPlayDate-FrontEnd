@@ -178,7 +178,7 @@ class PhotoContainer extends Component {
 	render() {
 		return (
 			<div>
-				<button onClick={this.addPhotoOpen} >Add a Photo</button>
+				<button className='btn-large grey lighten-1 blue-text text-darken-2 center-align' onClick={this.addPhotoOpen}><i className="large material-icons right">panorama</i>Add a Photo</button>
 				<br/>
 				<br/>
 				{this.state.activePhoto ? <Photos userInfo={this.props.userInfo} photoInfo={this.state.photos} photoViewToggle={this.photoViewOpen} editPhotoOpen={this.editPhotoOpen} deletePhoto={this.deletePhoto} /> : null }

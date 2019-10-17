@@ -19,6 +19,7 @@ class PostContainer extends Component {
 			createPost: false,
 			viewPost: false,
 			activePosts: false,
+			newPost: false,
 			postToEdit: {
 				postTitle: '',
 				postBody: ''
@@ -73,7 +74,8 @@ class PostContainer extends Component {
 			const parsedResponse = await post.json()
 			this.setState({
 				posts: [...this.state.posts, parsedResponse.data],
-				createPost: false
+				createPost: false,
+				newPost: false
 			})
 		} catch(err) {
 			console.log(err)
@@ -93,6 +95,17 @@ class PostContainer extends Component {
 
 		} catch(err) {
 			console.log(err)
+		}
+	}
+	newPostToggle = () => {
+		if(this.state.newPost) {
+			this.setState({
+				newPost: false
+			})
+		} else {
+			this.setState({
+				newPost: true
+			})
 		}
 	}
 	viewPostToggle = (post) => {
@@ -161,19 +174,24 @@ class PostContainer extends Component {
 	render() {
 		return (
 			<div className="post_container">
-				<div className="user_posts">
-					{!this.state.editPost && !this.state.viewPost ?
-						<div className='new_post'>
+				<div className='new_post_button'>
+					{!this.state.newPost ? <button className='btn-large grey lighten-1 blue-text text-darken-2 center-align' onClick={this.newPostToggle}><i className="material-icons right">comment</i>New Post</button> : null}
+				</div>
+				<div>
+					{this.state.newPost && !this.state.editPost && !this.state.viewPost ?
+						<div className='blue-grey darken-1'>
 							<form className='post_form' onSubmit={this.newPost}>
 								<label>Post Title</label>
 								<input name='postTitle' type='text' onChange={this.handleChange} />
 								<label>Post Body</label>
 								<input name='postBody' type='text' onChange={this.handleChange} />
-								<button>submit</button>
+								<button className='btn-large blue-grey center-align text-white'>Submit</button> <button className='btn-large blue-grey center-align text-white' onClick={this.newPostToggle}>Close</button>
 							</form> 
 						</div>
 					: null}
-					{this.state.activePosts && !this.state.editPost && !this.state.viewPost ?
+				</div>
+				<div id="user_posts">
+					{this.state.activePosts && !this.state.newPost && !this.state.editPost && !this.state.viewPost ?
 						<div> 
 						<h1 className='post_headers'>Your Posts</h1>
 						<UserPosts postInfo={this.state.posts} editPostOpen={this.editPostOpen} openPost={this.viewPostToggle} deletePost={this.deletePost} postInfo={this.state.posts} userInfo={this.state.username} />
@@ -182,8 +200,8 @@ class PostContainer extends Component {
 						: this.state.editPost && !this.state.activePosts && !this.state.viewPost ? <EditPost userInfo={this.props.userInfo} postToView={this.state.postToEdit} handlePostEditChange={this.handlePostEditChange} postClose={this.editPostClose} postInfo={this.state.posts} /> 
 						: null }
 				</div>
-				<div className="global_posts">
-					{this.state.activePosts && !this.state.editPost && !this.state.viewPost ? 
+				<div id="global_posts">
+					{this.state.activePosts && !this.state.newPost && !this.state.editPost && !this.state.viewPost ? 
 					<div>
 					<h1 className='post_headers'>What's everyone up to?</h1>
 					<OtherPosts postInfo={this.state.posts} userInfo={this.state.username} openPost={this.viewPostToggle} />
