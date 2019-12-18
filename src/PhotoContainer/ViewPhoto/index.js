@@ -36,7 +36,6 @@ class ViewPhoto extends Component {
 	componentDidMount(){
 		this.getPhoto().then(photo => {
 			if(photo.status === 200) {
-				console.log(photo.data.comment);
 				this.setState({
 					comment: [...photo.data.comment]
 				})

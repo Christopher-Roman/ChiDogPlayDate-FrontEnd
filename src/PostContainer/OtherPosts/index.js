@@ -9,7 +9,6 @@ const OtherPosts = (props) => {
 			globalOnly.push(post)
 		}
 	})
-	console.log(globalOnly);
 	if(globalOnly.length <= 0) {
 		globalResponse = <p>{props.userInfo.username}, what's on your mind?</p>
 		return globalResponse

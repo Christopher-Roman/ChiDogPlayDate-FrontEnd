@@ -46,7 +46,6 @@ class PostContainer extends Component {
 		this.getPosts().then(post => {
 			if(post.status === 200) {
 				let allPosts = post.data
-				console.log(allPosts);
 				this.setState({
 					posts: allPosts,
 					activePosts: true
@@ -158,7 +157,6 @@ class PostContainer extends Component {
 			})
 			const parsedResponse = await deletePost.json();
 			let remainingPosts = parsedResponse.data.post
-			console.log(remainingPosts);
 			this.setState({
 				posts: remainingPosts
 			})

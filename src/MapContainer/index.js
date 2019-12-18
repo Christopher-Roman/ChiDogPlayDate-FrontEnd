@@ -5,7 +5,6 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 export class MapContainer extends Component {
     render(){
     	const parkMarkers = this.props.parks.map((parks, i) => {
-    		console.log(parks);
     		return(
     			<Marker key={parks.id} name={parks.name} position={{lat: parks.geometry.location.lat, lng: parks.geometry.location.lng}} />
     		)

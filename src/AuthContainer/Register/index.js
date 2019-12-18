@@ -48,10 +48,8 @@ class Register extends Component {
         	   this.props.loggedIn()
             })
             this.props.setUser(this.state.username)
-    		console.log('Registration successful');
     	} else {
     		this.registrationFailed()
-    		console.log('Could Not Register. Please try again.');
     	}
     }
     render(){   

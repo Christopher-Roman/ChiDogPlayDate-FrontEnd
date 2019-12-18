@@ -41,7 +41,6 @@ class EditPet extends Component {
         await this.setState({
             selectedFile: e.target.files[0]
         });
-        console.log(this.state.selectedFile);
     }
     closeAndUpdatePet = async () => {
         try {
@@ -79,7 +78,6 @@ class EditPet extends Component {
         await this.setState({
           [e.currentTarget.name]: e.currentTarget.value
         })
-        console.log(this.state);
     }
     render() {
         return (

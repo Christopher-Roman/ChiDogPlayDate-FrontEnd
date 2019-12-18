@@ -52,9 +52,6 @@ class UserContainer extends Component {
 			}
 		})
 	}
-	printState = () => {
-		console.log(this.state)
-	}
 	fileSelectHandler = (e) => {
 		this.setState({
 			selectedFile: e.target.files[0]

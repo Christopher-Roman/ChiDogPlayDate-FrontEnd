@@ -49,7 +49,6 @@ class PhotoContainer extends Component {
 	componentDidMount() {
 		this.getPhoto().then(photo => {
 			if(photo.status === 200) {
-				console.log(photo.data.photo);
 				let photoArray = photo.data.photo
 				this.setState({
 					photos: photoArray,
@@ -79,6 +78,7 @@ class PhotoContainer extends Component {
 	newPhoto = async () => {
 		const formData = new FormData();
 		formData.append('photoUrl', this.state.selectedFile, this.state.selectedFile.name);
+		formData.append('description', this.state.description);
 		await axios.post(process.env.REACT_APP_URL + '/photo/new', formData, { withCredentials: true}).then((response) => {
 			if(response.status === 200) {
 				this.setState({
@@ -87,7 +87,6 @@ class PhotoContainer extends Component {
 				})
 			}
 		})
-		formData.append('description', this.state.description);
 	}
 	handlePostSubmit = async (e) => {
 		e.preventDefault();
