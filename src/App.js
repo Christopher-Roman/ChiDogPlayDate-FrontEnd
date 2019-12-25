@@ -21,11 +21,7 @@ class App extends Component {
       loginFail: false,
       register: false,
       confirmed: false,
-      pets: false,
-      photos: false,
-      posts: false,
-      user: false,
-      maps: false
+      view: null
     }
   }
   handleLogout = async (e) => {
@@ -43,13 +39,9 @@ class App extends Component {
         this.setState({
           loggedIn: false,
           loginFail: false,
-          pets: false,
-          photos: false,
-          posts: false,
-          user: false,
-          maps: false,
           register: false,
-          confirmed: false
+          confirmed: false,
+          view: null
         });
       } else {
         console.log('Logout Request Error -- ', logoutRequestParsed.error);
@@ -129,47 +121,27 @@ class App extends Component {
   }
   viewPets = (e) => {
     this.setState({
-      pets: true,
-      photos: false,
-      posts: false,
-      user: false,
-      maps: false
+      view: 'pet'
     })
   }
   viewPhotos = (e) => {
     this.setState({
-      pets: false,
-      photos: true,
-      posts: false,
-      user: false,
-      maps: false
+      view: 'photo'
     })
   }
   viewPosts = (e) => {
     this.setState({
-      pets: false,
-      photos: false,
-      posts: true,
-      user: false,
-      maps: false
+      view: 'post'
     })
   }
   viewUser = (e) => {
     this.setState({
-      pets: false,
-      photos: false,
-      posts: false,
-      user: true,
-      maps: false
+      view: 'user'
     })
   }
   viewMaps = (e) => {
     this.setState({
-      pets: false,
-      photos: false,
-      posts: false,
-      user: false,
-      maps: true
+      view: 'parks'
     })
   }
   render(){
@@ -184,12 +156,18 @@ class App extends Component {
             <br/>
             <br/>
             {!this.state.loggedIn && !this.state.loginFail && !this.state.register ? <Login registration={this.register} handleChange={this.handleChange} handleSubmit={this.handleSubmit} /> : null }
+            
             {this.state.register || this.state.loginFail ? <Register setUser={this.setUser} haveAnAccount={this.haveAnAccount} loggedIn={this.loggedIn} register={this.register} userInfo={this.state} /> : null }
-            {this.state.pets && this.state.loggedIn ? <PetContainer handleChange={this.handleChange} userInfo={this.state} /> : null }
-            {this.state.maps && this.state.loggedIn ? <ParkContainer userInfo={this.state} /> : null}
-            {this.state.photos ? <PhotoContainer userInfo={this.state.username} /> : null}
-            {this.state.user ? <UserContainer userInfo={this.state} /> : null}
-            {this.state.posts ? <PostContainer userInfo={this.state} /> : null}
+            
+            {this.state.view == 'pet' && this.state.loggedIn ? <PetContainer handleChange={this.handleChange} userInfo={this.state} /> : null }
+            
+            {this.state.view == 'parks' && this.state.loggedIn ? <ParkContainer changeView={this.changeView} userInfo={this.state} /> : null}
+            
+            {this.state.view == 'photo' && this.state.loggedIn  ? <PhotoContainer userInfo={this.state.username} /> : null}
+            
+            {this.state.view == 'user' && this.state.loggedIn  ? <UserContainer userInfo={this.state} /> : null}
+            
+            {this.state.view == 'post' && this.state.loggedIn ? <PostContainer userInfo={this.state} /> : null}
           </div>
         </div>
       </div>

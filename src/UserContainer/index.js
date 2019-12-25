@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Pets from '../PetContainer/Pets'
 
 
 class UserContainer extends Component {
@@ -13,6 +14,7 @@ class UserContainer extends Component {
 			address: '',
 			_id: '',
 			selectedFile: '',
+			view: '',
 			pet: [],
 			post: [],
 			photo: [],
@@ -95,9 +97,15 @@ class UserContainer extends Component {
 			[e.currentTarget.name]: e.currentTarget.value
 		})
 	}
+	viewPet = (e) => {
+		this.setState({
+			view: 'pet'
+		})	}
 	render() {
 		return (
 			<div>
+				<button onClick={this.viewPet}>Pets</button>
+				{this.state.view == 'pet' ? <Pets petInfo={this.state.pet} userInfo={this.state} name={this.state.username} /> : null}
 				<div className='profile-picture'>
 					{this.state.userPhoto ? <img alt='User' src={`${process.env.REACT_APP_URL}/${this.state.userPhoto}`} /> : null}
 				</div>
