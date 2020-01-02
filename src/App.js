@@ -159,15 +159,15 @@ class App extends Component {
             
             {this.state.register || this.state.loginFail ? <Register setUser={this.setUser} haveAnAccount={this.haveAnAccount} loggedIn={this.loggedIn} register={this.register} userInfo={this.state} /> : null }
             
-            {this.state.view == 'pet' && this.state.loggedIn ? <PetContainer handleChange={this.handleChange} userInfo={this.state} /> : null }
+            {this.state.view === 'pet' && this.state.loggedIn ? <PetContainer handleChange={this.handleChange} userInfo={this.state} /> : null }
             
-            {this.state.view == 'parks' && this.state.loggedIn ? <ParkContainer changeView={this.changeView} userInfo={this.state} /> : null}
+            {this.state.view === 'parks' && this.state.loggedIn ? <ParkContainer changeView={this.changeView} userInfo={this.state} /> : null}
             
-            {this.state.view == 'photo' && this.state.loggedIn  ? <PhotoContainer userInfo={this.state.username} /> : null}
+            {this.state.view === 'photo' && this.state.loggedIn  ? <PhotoContainer userInfo={this.state.username} /> : null}
             
-            {this.state.view == 'user' && this.state.loggedIn  ? <UserContainer userInfo={this.state} /> : null}
+            {this.state.view === 'user' && this.state.loggedIn  ? <UserContainer userInfo={this.state} /> : null}
             
-            {this.state.view == 'post' && this.state.loggedIn ? <PostContainer userInfo={this.state} /> : null}
+            {this.state.view === 'post' && this.state.loggedIn ? <PostContainer userInfo={this.state} /> : null}
           </div>
         </div>
       </div>

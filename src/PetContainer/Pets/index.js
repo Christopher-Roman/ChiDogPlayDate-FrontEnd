@@ -7,10 +7,10 @@ const Pets = (props) => {
 	let response = null
 	if(props.petInfo.length <= 0) {
 		response = <p>{props.userInfo.username}, you've gotta share your pups with the world!</p>
-		return response
+		return response	
 	} else {
 		let foundPets = props.petInfo;
-		const pets = foundPets.map((pet, i) => {
+		let pets = foundPets.map((pet, i) => {
 			return (
 			    <div className="col s12 m7 l4" key={i}>
 					<div className="card grey lighten-1 center-align">

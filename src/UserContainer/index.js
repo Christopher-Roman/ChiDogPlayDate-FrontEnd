@@ -105,7 +105,7 @@ class UserContainer extends Component {
 		return (
 			<div>
 				<button onClick={this.viewPet}>Pets</button>
-				{this.state.view == 'pet' ? <Pets petInfo={this.state.pet} userInfo={this.state} name={this.state.username} /> : null}
+				{this.state.view == 'pet' ? <Pets user={'user'} petInfo={this.state.pet} userInfo={this.state} name={this.state.username} /> : null}
 				<div className='profile-picture'>
 					{this.state.userPhoto ? <img alt='User' src={`${process.env.REACT_APP_URL}/${this.state.userPhoto}`} /> : null}
 				</div>
