@@ -171,7 +171,7 @@ class PostContainer extends Component {
   	}
 	render() {
 		return (
-			<div className="post_container">
+			<div className='post_container'>
 				<div className='new_post_button'>
 					{!this.state.newPost ? <button className='btn-large grey lighten-1 blue-text text-darken-2 center-align' onClick={this.newPostToggle}><i className="material-icons right">comment</i>New Post</button> : null}
 				</div>

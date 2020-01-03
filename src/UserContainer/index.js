@@ -98,19 +98,26 @@ class UserContainer extends Component {
 		})
 	}
 	viewPet = (e) => {
-		this.setState({
-			view: 'pet'
-		})	}
+		if(!this.state.view) {
+			this.setState({
+				view: 'pet'
+			})	
+		} else {
+			this.setState({
+				view: null
+			})
+		}
+	}
 	render() {
 		return (
 			<div>
 				<button onClick={this.viewPet}>Pets</button>
-				{this.state.view == 'pet' ? <Pets user={'user'} petInfo={this.state.pet} userInfo={this.state} name={this.state.username} /> : null}
-				<div className='profile-picture'>
-					{this.state.userPhoto ? <img alt='User' src={`${process.env.REACT_APP_URL}/${this.state.userPhoto}`} /> : null}
-				</div>
+				<div>
 				<br/>
-				<h1>Hello {this.state.username}</h1>
+				{!this.state.view ? <div> <h1>Hello {this.state.username}</h1>
+				<div className='profile-picture'>
+				{this.state.userPhoto && !this.state.view ? <img alt='User' src={`${process.env.REACT_APP_URL}/${this.state.userPhoto}`} /> : null}
+				</div>
 				<br/>
 				<br/>
 				{this.state.userBio}
@@ -144,7 +151,9 @@ class UserContainer extends Component {
 				<br/>
 				<br/>
 				<br/>
-				<br/>
+				<br/> </div> : null}
+				</div>
+				{this.state.view === 'pet' ? <Pets user={'user'} petInfo={this.state.pet} userInfo={this.state} name={this.state.username} /> : null}
 			</div>
 		)
 	}
