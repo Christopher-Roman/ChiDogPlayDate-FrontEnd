@@ -200,9 +200,11 @@ class ViewPhoto extends Component {
 									<b>{comments.createdBy}</b><span> {comments.createdAt}</span>
 								</div>
 								<div className='comment-body'>
-									<img alt='User upload' className='photoList' src={`${process.env.REACT_APP_URL}/${comments.photo}`} /><br/>
+									{comments.photo ? <div>
+										<img alt='User upload' className='photoList' src={`${process.env.REACT_APP_URL}/${comments.photo}`} /><br/>
+									</div>: null}
 									{comments.commentBody}
-								</div>
+								</div> 
 								{commentButtons}
 							</div>
 						</div>
