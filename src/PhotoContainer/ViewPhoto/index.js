@@ -8,7 +8,7 @@ require('../../App.css');
 //Styles for Modal
 const customStyles = {
   content : {
-    backgroundColor: '#90a4ae'
+    backgroundColor: '#424242'
   }
 };
 
@@ -194,16 +194,19 @@ class ViewPhoto extends Component {
 				}
 				return (
 					<div key={comments._id} className="row">
-					    <div className="col s6 m3 l2">
+					    <div className="col s6 m5 l4">
 					      <div className="card grey lighten-1">
 					        <div className="card-content blue-text text-darken-2">
-					          <span className="comemnt-title">{comments.createdBy} on {new Intl.DateTimeFormat('en-US', { 
-						                month: 'short', 
-						                day: '2-digit',
-						                year: 'numeric', 
-						            }).format(new Date(comments.createdAt))}
+					          <span className="comment-title">
+					          		<span className="created-by">{comments.createdBy}</span> 
+					          		<span className="created-on">{new Intl.DateTimeFormat('en-US', { 
+							                month: 'short', 
+							                day: '2-digit',
+							                year: 'numeric', 
+							            }).format(new Date(comments.createdAt))}
+					          		</span>
 					          </span>
-					          <p>{comments.commentBody}</p>
+					          <p className="comment-body">{comments.commentBody}</p>
 					          {comments.photo ?
 					          	<div>
 					          		<img alt='User upload' className='photoList' src={`${process.env.REACT_APP_URL}/${comments.photo}`} />
@@ -228,7 +231,9 @@ class ViewPhoto extends Component {
 		        	<div className='photo-container'>
 		        		<img className='pet-photo' alt='User Upload' src={`${process.env.REACT_APP_URL}/${this.state.url}`}/>
 						 <br/>
-						 <button onClick={this.toggleAddComment}>Comment?</button>
+						 <div className="button-container">
+						 	<button className='btn-large grey lighten-1 blue-text text-darken-2 center-align' onClick={this.toggleAddComment}>Add a Comment</button>
+		        		</div>
 		        	</div>
 		    		<div className='comment-container'>
 		    			{photoComments}

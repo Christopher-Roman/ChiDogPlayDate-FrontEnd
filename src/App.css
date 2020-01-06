@@ -130,7 +130,7 @@ span {
 .comment-container {
 	position: absolute;
     float: right;
-    left: 80%;
+    left: 65%;
     min-width: 100%;
     top: 10%;
 }
@@ -144,4 +144,24 @@ span {
 .close {
 	position: absolute;
 	left: 96%;
+}
+
+.material-icons {
+       vertical-align: bottom !important;
+       align-self: right;
+}
+
+.created-on {
+	position: relative;
+	float: right;
+	font-size: 15px;
+	padding-left: 65%;
+}
+
+.created-by {
+	font-size: 35px;
+}
+
+.comment-body {
+	font-size: 25px;
 }

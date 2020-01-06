@@ -26,12 +26,12 @@ const HeaderApp = (props) => {
 			      <span id='logo' className="responsive-img blue-grey-text text-lighten-4 right">ChiDogs<img className="responsive-img right" alt="logo" src={'Chidog-logo-favicon.png'}/></span>
 			      <a href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
 			      <ul id="nav-mobile" className="left hide-on-med-and-down">
-					{props.userInfo.loggedIn ? <li><button className="waves-effect waves-light btn-large blue-grey lighten-4 blue-text text-darken-2" onClick={props.viewPets}><i className="large material-icons right">pets</i>Pets</button></li> : null}
-					{props.userInfo.loggedIn ? <li><button className="waves-effect waves-light btn-large blue-grey lighten-4 blue-text text-darken-2" onClick={props.viewPhotos}><i className="large material-icons right">panorama</i>Photos</button></li> : null}
-					{props.userInfo.loggedIn ? <li><button className="waves-effect waves-light btn-large blue-grey lighten-4 blue-text text-darken-2" onClick={props.viewPosts}><i className="large material-icons right">comment</i>Posts</button></li> : null}
-					{props.userInfo.loggedIn ? <li><button className="waves-effect waves-light btn-large blue-grey lighten-4 blue-text text-darken-2" onClick={props.viewUser}><i className="large material-icons right">person</i>Profile</button></li> : null}
-					{props.userInfo.loggedIn ? <li><button className="waves-effect waves-light btn-large blue-grey lighten-4 blue-text text-darken-2" onClick={props.viewMaps}><i className="large material-icons right">map</i>Parks</button></li> : null}
-			      	{props.userInfo.loggedIn ? <li><button className="waves-effect waves-light btn-large blue-grey lighten-4 blue-text text-darken-2" onClick={props.handleLogout}>Logout</button></li> : null}
+					{props.userInfo.loggedIn ? <li><button className="btn-large blue-grey lighten-4 blue-text text-darken-2" onClick={props.viewPets}><i className="material-icons right">pets</i>Pets</button></li> : null}
+					{props.userInfo.loggedIn ? <li><button className="btn-large blue-grey lighten-4 blue-text text-darken-2" onClick={props.viewPhotos}><i className="large material-icons right">panorama</i>Photos</button></li> : null}
+					{props.userInfo.loggedIn ? <li><button className="btn-large blue-grey lighten-4 blue-text text-darken-2" onClick={props.viewPosts}><i className="large material-icons right">comment</i>Posts</button></li> : null}
+					{props.userInfo.loggedIn ? <li><button className="btn-large blue-grey lighten-4 blue-text text-darken-2" onClick={props.viewUser}><i className="large material-icons right">person</i>Profile</button></li> : null}
+					{props.userInfo.loggedIn ? <li><button className="btn-large blue-grey lighten-4 blue-text text-darken-2" onClick={props.viewMaps}><i className="large material-icons right">map</i>Parks</button></li> : null}
+			      	{props.userInfo.loggedIn ? <li><button className="btn-large blue-grey lighten-4 blue-text text-darken-2" onClick={props.handleLogout}>Logout</button></li> : null}
 			      </ul>
 			    </div>
 			</nav>
