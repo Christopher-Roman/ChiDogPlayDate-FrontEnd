@@ -8,7 +8,7 @@ require('../../App.css');
 //Styles for Modal
 const customStyles = {
   content : {
-    backgroundColor: '#455a64'
+    backgroundColor: '#90a4ae'
   }
 };
 
@@ -176,40 +176,47 @@ class ViewPhoto extends Component {
 					if(this.props.photoToView.createdBy === this.props.userInfo.username && this.props.photoToView.createdBy === comments.createdBy) {
 							commentButtons = 
 								<div>
-									<button className='medPosBtns' onClick={this.editCommentOpen.bind(null, comments)}>Edit</button>
-									<button className='medNegBtns' onClick={this.deleteComment.bind(null, comments._id)}>Delete</button>
+									<button className='btn-medium waves-effect waves-light green darken-1' onClick={this.editCommentOpen.bind(null, comments)}><i className="material-icons right">mode_edit</i></button>
+									<button className='btn-medium waves-effect waves-light red accent-4' onClick={this.deleteComment.bind(null, comments._id)}><i className="material-icons right">delete_forever</i></button>
 								</div>
 						} else if(comments.createdBy === this.props.userInfo.username) {
 							commentButtons = 
 							<div>
-								<button className='medPosBtns' onClick={this.editCommentOpen.bind(null, comments)}>Edit</button>
-								<button className='medNegBtns' onClick={this.deleteComment.bind(null, comments._id)}>Delete</button>
+								<button className='btn-medium waves-effect waves-light green darken-1' onClick={this.editCommentOpen.bind(null, comments)}><i className="material-icons right">mode_edit</i></button>
+								<button className='btn-medium waves-effect waves-light red accent-4' onClick={this.deleteComment.bind(null, comments._id)}><i className="material-icons right">delete_forever</i></button>
 							</div>
 						} else if(this.props.photoToView.createdBy === this.props.userInfo.username && comments.createdBy !== this.props.userInfo.username) {
 							commentButtons = 
-								<button className='medNegBtns' onClick={this.deleteComment.bind(null, comments._id)}>Delete</button>
+								<button className='btn-medium waves-effect waves-light red accent-4' onClick={this.deleteComment.bind(null, comments._id)}><i className="material-icons right">delete_forever</i></button>
 						} else {
 							commentButtons = null
 						}
 				}
-			return (
-					<div key={comments._id}>
-						<div className='comment-card'>
-							<div className='comment-container'>
-								<div className='comment-header'>
-									<b>{comments.createdBy}</b><span> {comments.createdAt}</span>
-								</div>
-								<div className='comment-body'>
-									{comments.photo ? <div>
-										<img alt='User upload' className='photoList' src={`${process.env.REACT_APP_URL}/${comments.photo}`} /><br/>
-									</div>: null}
-									{comments.commentBody}
-								</div> 
-								{commentButtons}
-							</div>
-						</div>
-					</div>
-				)
+				return (
+					<div key={comments._id} className="row">
+					    <div className="col s6 m3 l2">
+					      <div className="card grey lighten-1">
+					        <div className="card-content blue-text text-darken-2">
+					          <span className="comemnt-title">{comments.createdBy} on {new Intl.DateTimeFormat('en-US', { 
+						                month: 'short', 
+						                day: '2-digit',
+						                year: 'numeric', 
+						            }).format(new Date(comments.createdAt))}
+					          </span>
+					          <p>{comments.commentBody}</p>
+					          {comments.photo ?
+					          	<div>
+					          		<img alt='User upload' className='photoList' src={`${process.env.REACT_APP_URL}/${comments.photo}`} />
+					          	</div>
+					          	: null}
+					        </div>
+					        <div className="card-action">
+					        	{commentButtons}
+					        </div>
+					      </div>
+					    </div>
+				    </div> 
+				    )
 			})
 		}
 		return (
@@ -217,11 +224,11 @@ class ViewPhoto extends Component {
 				isOpen={this.state.viewPhoto} 
 				style={customStyles}
 				onRequestClose={this.props.photoViewClose}>
-		        <div>
-		        	<div>
-		        		<div className='photo-container'>
-		        			<img alt='User Upload' src={`${process.env.REACT_APP_URL}/${this.state.url}`}/>
-		        		</div>
+		        <div className='view-photo'>
+		        	<div className='photo-container'>
+		        		<img className='pet-photo' alt='User Upload' src={`${process.env.REACT_APP_URL}/${this.state.url}`}/>
+						 <br/>
+						 <button onClick={this.toggleAddComment}>Comment?</button>
 		        	</div>
 		    		<div className='comment-container'>
 		    			{photoComments}
@@ -237,10 +244,9 @@ class ViewPhoto extends Component {
 							</form>
 						</div>
 						 : null}
-						 <button onClick={this.toggleAddComment}>Comment?</button>
 		    		</div>
 		        </div>
-		        <button onClick={this.props.photoViewClose}>close</button>
+		        <button className='close' onClick={this.props.photoViewClose}><i className="material-icons">close</i></button>
 	        </Modal>
 		)
 	}

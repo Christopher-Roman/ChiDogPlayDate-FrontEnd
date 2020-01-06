@@ -71,7 +71,12 @@ span {
 	justify-content: space-between;
 }
 
-#user_posts, #global_posts {
+.view-photo {
+	display: inline-flex;
+	justify-content: space-between;
+}
+
+#user_posts, #global_posts, .comment-container {
 	overflow-y: scroll;
 }
 
@@ -106,4 +111,37 @@ span {
 .new_post_button {
 	position: absolute;
 	float: left;
+}
+
+.comment-title {
+	font-size: 10px;
+}
+
+.photo-container {
+	position: absolute;
+    left: 75px;
+    top: 5%;
+    right: -15%;
+    bottom: 1%;
+    width: 60%;
+    max-height: auto;
+}
+
+.comment-container {
+	position: absolute;
+    float: right;
+    left: 80%;
+    min-width: 100%;
+    top: 10%;
+}
+
+.pet-photo {
+	min-width: 95%;
+	max-height: 95%;
+	object-fit: contain;
+}
+
+.close {
+	position: absolute;
+	left: 96%;
 }
