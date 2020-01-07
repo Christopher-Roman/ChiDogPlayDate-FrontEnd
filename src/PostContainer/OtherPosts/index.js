@@ -10,7 +10,7 @@ const OtherPosts = (props) => {
 		}
 	})
 	if(globalOnly.length <= 0) {
-		globalResponse = <p>{props.userInfo.username}, what's on your mind?</p>
+		globalResponse = <p>Anyone out there?</p>
 		return globalResponse
 	} else {
 		const posts = globalOnly.map((post, i) => {
