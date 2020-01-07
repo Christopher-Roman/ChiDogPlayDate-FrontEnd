@@ -26,13 +26,17 @@ const ViewPost = (props) => {
 		})
 	}
 	return (
-		<div className='container'>
+		<div className='container'> 
 			<div className="col s12 m6 l12">
 		        <div className="card blue-grey darken-1">
 			        <span className="card-title left">{props.postToView.createdBy}</span>
 			        <div className="card-content white-text">
 			          <span className="card-title left">{props.postToView.postTitle}</span>
-			          <span className="card-title right">{props.postToView.createdAt}</span>
+			          <span className="card-title right">{new Intl.DateTimeFormat('en-US', { 
+							                month: 'short', 
+							                day: '2-digit',
+							                year: 'numeric', 
+							            }).format(new Date(props.postToView.createdAt))}</span>
 			        </div>
 			        <div className="card-content white-text">
 			          <p>{props.postToView.postBody}</p>
