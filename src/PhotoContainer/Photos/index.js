@@ -7,7 +7,7 @@ require('../../App.css');
 const Photos = (props) => {
 	let response = null
 	if(props.photoInfo.length <= 0) {
-		response = <p>{props.userInfo.username}, you've gotta share your pics with the world!</p>
+		response = <p>{props.userInfo}, you've gotta share your pics with the world!</p>
 		return response
 	} else {
 		const photos = props.photoInfo.map((photo, i) => {

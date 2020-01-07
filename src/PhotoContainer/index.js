@@ -11,7 +11,7 @@ class PhotoContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			username: '',
+			username: props.userInfo.username,
 			selectedFile: null,
 			description: '',
 			photos: [],
@@ -180,7 +180,7 @@ class PhotoContainer extends Component {
 				<button className='btn-large grey lighten-1 blue-text text-darken-2 center-align' onClick={this.addPhotoOpen}><i className="large material-icons right">panorama</i>Add a Photo</button>
 				<br/>
 				<br/>
-				{this.state.activePhoto ? <Photos userInfo={this.props.userInfo} photoInfo={this.state.photos} photoViewToggle={this.photoViewOpen} editPhotoOpen={this.editPhotoOpen} deletePhoto={this.deletePhoto} /> : null }
+				{this.state.activePhoto ? <Photos userInfo={this.state.username} photoInfo={this.state.photos} photoViewToggle={this.photoViewOpen} editPhotoOpen={this.editPhotoOpen} deletePhoto={this.deletePhoto} /> : null }
 				{this.state.addPhoto ? <CreatePhotoModal addPhotoOpen={this.addPhotoOpen} addPhotoClose={this.addPhotoClose} fileSelectHandler={this.fileSelectHandler} handleChange={this.handleChange} handlePostSubmit={this.handlePostSubmit} addPhoto={this.state.addPhoto} selectedFile={this.state.selectedFile} /> : null }
 				{this.state.viewPhoto ? <ViewPhoto userInfo={this.state} photoInfo={this.state.photos} photoToView={this.state.photoToView} viewPhoto={this.state.viewPhoto} photoViewClose={this.photoViewClose} /> : null}
 				{this.state.editPhoto ? <EditPhotoModal editPhotoOpen={this.editPhotoOpen} editPhotoClose={this.editPhotoClose} fileSelectHandler={this.fileSelectHandler} handlePhotoEditChange={this.handlePhotoEditChange} selectedFile={this.state.selectedFile} editPhoto={this.state.editPhoto} handlePutSubmit={this.handlePutSubmit} photoToEdit={this.state.photoToEdit} /> : null}
