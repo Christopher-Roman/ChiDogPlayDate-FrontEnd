@@ -131,7 +131,7 @@ span {
     float: right;
     left: 65%;
     top: 11%;
-    max-height: 63.4%;
+    max-height: 65.5%;
     width: 28.5%;
     background-color: #90a4ae;
     border: solid 7px #90a4ae;
@@ -174,14 +174,14 @@ span {
 
 .comment-form {
 	font-size: 20px;
-	padding-top: 50%;
+	padding-top: 40%;
 	max-width: 30%;
-	padding-left: 3%;
+	padding-left: 8%;
 }
 
 .button-container {
-	padding-top: 50%;
-	padding-left: 3%;
+	padding-top: 40%;
+	padding-left: 7.5%;
 	width: 20%;
 }
 

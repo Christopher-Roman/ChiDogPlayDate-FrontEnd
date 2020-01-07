@@ -176,18 +176,18 @@ class ViewPhoto extends Component {
 					if(this.props.photoToView.createdBy === this.props.userInfo.username && this.props.photoToView.createdBy === comments.createdBy) {
 							commentButtons = 
 								<div>
-									<button className='btn-medium waves-effect waves-light green darken-1' onClick={this.editCommentOpen.bind(null, comments)}><i className="material-icons right">mode_edit</i></button>
-									<button className='btn-medium waves-effect waves-light red accent-4' onClick={this.deleteComment.bind(null, comments._id)}><i className="material-icons right">delete_forever</i></button>
+									<button className='btn-medium waves-effect waves-light green darken-1' onClick={this.editCommentOpen.bind(null, comments)}><i className="material-icons">mode_edit</i></button>
+									<button className='btn-medium waves-effect waves-light red accent-4' onClick={this.deleteComment.bind(null, comments._id)}><i className="material-icons">delete_forever</i></button>
 								</div>
-						} else if(comments.createdBy === this.props.userInfo.username) {
+						} else if(comments.createdBy === this.props.userInfo.username && this.props.photoToView.createdBy !== comments.createdBy) {
 							commentButtons = 
 							<div>
-								<button className='btn-medium waves-effect waves-light green darken-1' onClick={this.editCommentOpen.bind(null, comments)}><i className="material-icons right">mode_edit</i></button>
-								<button className='btn-medium waves-effect waves-light red accent-4' onClick={this.deleteComment.bind(null, comments._id)}><i className="material-icons right">delete_forever</i></button>
+								<button className='btn-medium waves-effect waves-light green darken-1' onClick={this.editCommentOpen.bind(null, comments)}><i className="material-icons">mode_edit</i></button>
+								<button className='btn-medium waves-effect waves-light red accent-4' onClick={this.deleteComment.bind(null, comments._id)}><i className="material-icons">delete_forever</i></button>
 							</div>
 						} else if(this.props.photoToView.createdBy === this.props.userInfo.username && comments.createdBy !== this.props.userInfo.username) {
 							commentButtons = 
-								<button className='btn-medium waves-effect waves-light red accent-4' onClick={this.deleteComment.bind(null, comments._id)}><i className="material-icons right">delete_forever</i></button>
+								<button className='btn-medium waves-effect waves-light red accent-4' onClick={this.deleteComment.bind(null, comments._id)}><i className="material-icons">delete_forever</i></button>
 						} else {
 							commentButtons = null
 						}
@@ -224,7 +224,7 @@ class ViewPhoto extends Component {
 				isOpen={this.state.viewPhoto} 
 				style={customStyles}
 				onRequestClose={this.props.photoViewClose}>
-		        <button className='close' onClick={this.props.photoViewClose}><i className="material-icons">close</i></button>
+		        <button className='close' onClick={this.props.photoViewClose}><i className="material-icons medium">close</i></button>
 		        <div className='view-photo'>
 		        	<div className='photo-container'>
 		        		<img className='pet-photo' alt='User Upload' src={`${process.env.REACT_APP_URL}/${this.state.url}`}/>
@@ -235,7 +235,7 @@ class ViewPhoto extends Component {
 				 	<button id='comment-button' className='btn-large grey lighten-1 blue-text text-darken-2 center-align' onClick={this.toggleAddComment}>Add a Comment</button>
         		</div> : null }
 				{this.state.addComment ? <div className='comment-form'>
-					<form className='col s12 m6 l6' onSubmit={this.handlePostSubmit}>
+					<form className='col s12 m6 l5' onSubmit={this.handlePostSubmit}>
 						<label className='comment-form'>What would you like to say?</label>
 						<input type='text' name='commentBody' onChange={this.handleChange}/>
 						<button className='btn-medium waves-effect waves-light green darken-1' type='submit'><i className="material-icons">comment</i></button>
