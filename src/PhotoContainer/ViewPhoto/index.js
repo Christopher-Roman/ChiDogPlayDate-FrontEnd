@@ -224,30 +224,41 @@ class ViewPhoto extends Component {
 				isOpen={this.state.viewPhoto} 
 				style={customStyles}
 				onRequestClose={this.props.photoViewClose}>
-		        <button className='close' onClick={this.props.photoViewClose}><i className="material-icons medium">close</i></button>
-		        <div className='view-photo'>
-		        	<div className='photo-container'>
-		        		<img className='pet-photo' alt='User Upload' src={`${process.env.REACT_APP_URL}/${this.state.url}`}/>
+				<div >
+		        	<button className='close' onClick={this.props.photoViewClose}><i className="material-icons small">close</i></button>
+		        </div>
+				<div className='view-container' >
+					<div className='col s4 m2 l3'>
+						<div className='photo-and-button'>
+					        <div className='view-photo'>
+					        	<div className='photo-container'>
+					        		<img id='pet-photo' alt='User Upload' src={`${process.env.REACT_APP_URL}/${this.state.url}`}/>
+					    			{!this.state.addComment ? 
+					    				<div className="button-container">
+									 	<button id='comment-button' className='btn-large grey lighten-1 blue-text text-darken-2 center-align' onClick={this.toggleAddComment}>Add a Comment</button>
+					        			</div> 
+					        		: null }
+									{this.state.addComment ? <div className='comment-form'>
+										<form className='col s6 m2 l3' onSubmit={this.handlePostSubmit}>
+											<label className='comment-form'>What would you like to say?</label>
+											<input type='text' name='commentBody' onChange={this.handleChange}/>
+											<button className='btn-medium waves-effect waves-light green darken-1' type='submit'><i className="material-icons">comment</i></button>
+											<button className='btn-medium waves-effect waves-light red accent-4' onClick={this.toggleAddComment}><i className="material-icons">close</i></button>
+										</form>
+									</div> : null}
+					        	</div>
+							</div>
+				        </div>
+					</div>
+					<div className='col s6 m2 l3'>
+			    		<div className='comment-container'>
+			    			<div className='comments'>
+			    				{photoComments}
+			    			</div>
+			    			{this.state.editComment ? <EditCommentModal handlePutSubmit={this.handlePutSubmit} commentToEdit={this.state.commentToEdit} handleCommentEditChange={this.handleCommentEditChange} editCommentClose={this.editCommentClose} editComment={this.state.editComment}  /> : null}
+			    		</div>
 		        	</div>
 		        </div>
-    			{!this.state.addComment ? 
-    				<div className="button-container">
-				 	<button id='comment-button' className='btn-large grey lighten-1 blue-text text-darken-2 center-align' onClick={this.toggleAddComment}>Add a Comment</button>
-        		</div> : null }
-				{this.state.addComment ? <div className='comment-form'>
-					<form className='col s12 m6 l5' onSubmit={this.handlePostSubmit}>
-						<label className='comment-form'>What would you like to say?</label>
-						<input type='text' name='commentBody' onChange={this.handleChange}/>
-						<button className='btn-medium waves-effect waves-light green darken-1' type='submit'><i className="material-icons">comment</i></button>
-						<button className='btn-medium waves-effect waves-light red accent-4' onClick={this.toggleAddComment}><i className="material-icons">close</i></button>
-					</form>
-				</div> : null}
-	    		<div className='comment-container'>
-	    			<div className='comments'>
-	    				{photoComments}
-	    			</div>
-	    			{this.state.editComment ? <EditCommentModal handlePutSubmit={this.handlePutSubmit} commentToEdit={this.state.commentToEdit} handleCommentEditChange={this.handleCommentEditChange} editCommentClose={this.editCommentClose} editComment={this.state.editComment}  /> : null}
-	    		</div>
 	        </Modal>
 		)
 	}
