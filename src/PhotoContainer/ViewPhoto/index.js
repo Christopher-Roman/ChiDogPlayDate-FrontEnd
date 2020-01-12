@@ -237,15 +237,14 @@ class ViewPhoto extends Component {
 					    				<div className="button-container">
 									 	<button id='comment-button' className='btn-large grey lighten-1 blue-text text-darken-2 center-align' onClick={this.toggleAddComment}>Add a Comment</button>
 					        			</div> 
-					        		: null }
-									{this.state.addComment ? <div className='comment-form'>
+					        		:  <div className='comment-form'>
 										<form className='col s6 m2 l3' onSubmit={this.handlePostSubmit}>
 											<label className='comment-form'>What would you like to say?</label>
 											<input type='text' name='commentBody' onChange={this.handleChange}/>
 											<button className='btn-medium waves-effect waves-light green darken-1' type='submit'><i className="material-icons">comment</i></button>
 											<button className='btn-medium waves-effect waves-light red accent-4' onClick={this.toggleAddComment}><i className="material-icons">close</i></button>
 										</form>
-									</div> : null}
+									</div> }
 					        	</div>
 							</div>
 				        </div>

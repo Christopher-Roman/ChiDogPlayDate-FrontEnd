@@ -22,7 +22,7 @@ const HeaderApp = (props) => {
 	return (
 		<div>
 			<nav className='nav-extended'>
-			    <div className="nav-wrapper red accent-4">
+			    <div className="nav-wrapper red lighten-1">
 			      <span id='logo' className="responsive-img blue-grey-text text-lighten-4 right">ChiDogs<img className="responsive-img right" alt="logo" src={'Chidog-logo-favicon.png'}/></span>
 			      <a href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
 			      <ul id="nav-mobile" className="left hide-on-med-and-down">
