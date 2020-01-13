@@ -21,7 +21,7 @@ const Photos = (props) => {
 					    <div className="card-action">
 						  <button className="btn-medium waves-effect waves-light blue darken-2" onClick={props.photoViewToggle.bind(null, photo)}><i className="material-icons">open_in_new</i></button> 
 						  <button className="btn-medium waves-effect waves-light green darken-1" onClick={props.editPhotoOpen.bind(null, photo)}><i className="material-icons">mode_edit</i></button>
-						  <button className="btn-medium waves-effect waves-light red accent-4" onClick={props.deletePhoto.bind(null, photo._id)}><i className="material-icons">delete_forever</i></button>
+						  <button className="btn-medium waves-effect waves-light red lighten-1" onClick={props.deletePhoto.bind(null, photo._id)}><i className="material-icons">delete_forever</i></button>
 					    </div>
 				    </div>
 			    </div>

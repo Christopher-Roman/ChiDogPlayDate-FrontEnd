@@ -31,9 +31,9 @@ const Pets = (props) => {
 							</div>
 							<span className="card-title blue-text text-darken-2">{pet.firstName}</span>
 							<div className="card-action">
-								<button className="btn-medium waves-effect waves-light blue darken-2" onClick={props.viewPet.bind(null, pet)}><i className="material-icons right">open_in_new</i>View</button> 
-								<button className="btn-medium waves-effect waves-light green darken-1 white" onClick={props.openAndEditPet.bind(null, pet)}><i className="material-icons right">mode_edit</i>Edit</button>
-								<button className="btn-medium waves-effect waves-light red accent-4" onClick={props.deletePet.bind(null, pet._id)}><i className="material-icons right">delete_forever</i></button>
+								<button className="btn-medium waves-effect waves-light blue darken-2" onClick={props.viewPet.bind(null, pet)}><i className="material-icons">open_in_new</i></button> 
+								<button className="btn-medium waves-effect waves-light green darken-1 white" onClick={props.openAndEditPet.bind(null, pet)}><i className="material-icons">mode_edit</i></button>
+								<button className="btn-medium waves-effect waves-light red lighten-1" onClick={props.deletePet.bind(null, pet._id)}><i className="material-icons">delete_forever</i></button>
 						 	</div>
 					  	</div>
 				  	</div>
