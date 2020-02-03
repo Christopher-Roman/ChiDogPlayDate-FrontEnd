@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Pets from '../PetContainer/Pets'
+import Photos from '../PhotoContainer/Photos'
 
 
 class UserContainer extends Component {
@@ -108,6 +109,17 @@ class UserContainer extends Component {
 			})
 		}
 	}
+	viewPhoto = (e) => {
+		if(this.state.view !== 'photos') {
+			this.setState({
+				view: 'photos'
+			})	
+		} else {
+			this.setState({
+				view: 'profile info'
+			})
+		}
+	}
 	render() {
 		return (
 			<div>
@@ -119,7 +131,7 @@ class UserContainer extends Component {
 					    <span className="card-title blue-text text-darken-2">{this.state.userBio}</span>
 					    <div className="card-action">
 						  <button className="btn-large waves-effect waves-light blue darken-2" onClick={this.viewPet}>Pets</button> 
-						  <button className="btn-large waves-effect waves-light green darken-1">Photos</button>
+						  <button className="btn-large waves-effect waves-light green darken-1" onClick={this.viewPhoto}>Photos</button>
 						  <button className="btn-large waves-effect waves-light red lighten-1">Posts</button>
 					    </div>
 				    </div>
@@ -142,9 +154,15 @@ class UserContainer extends Component {
 				</form> : null }
 				{this.state.view === 'pet' ? 
 					<div>
-						<button className="btn-large waves-effect waves-light blue darken-2" onClick={this.viewPet}>Back</button> 
+						<button className="btn-large waves-effect waves-light blue darken-2" onClick={this.viewPet}>Back<i class="material-icons right">keyboard_arrow_right</i></button> 
 						<Pets user={'user'} petInfo={this.state.pet} userInfo={this.state} name={this.state.username} /> 
 					</div>
+				: null}
+				{this.state.view === 'photos' ?
+					<div>
+						<button className="btn-large waves-effect waves-light green darken-1" onClick={this.viewPhoto}>Back<i class="material-icons right">keyboard_arrow_right</i></button>
+						<Photos user={'user'} photoInfo={this.state.photo} userInfo={this.state} name={this.state.username} />
+					</div> 
 				: null}
 			</div>
 		)
