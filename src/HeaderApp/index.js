@@ -38,12 +38,12 @@ const HeaderApp = (props) => {
 			<ul className="sidenav" id="mobile-demo">
 				<a href='#' data-target="mobile-demo" id='nav-close' className="btn-flat btn-large sidenav-close hide-on-large-only"><i className="large material-icons">close</i></a>
 				{!props.userInfo.loggedIn ? <h5 className='nav-message'>You must be logged in to utilize this menu.</h5> : null}
-			    {props.userInfo.loggedIn ? <li><button className="blue-text text-darken-2 sidenav-close" onClick={props.viewPets}><i className="material-icons right">pets</i>Pets</button></li> : null}
-				{props.userInfo.loggedIn ? <li><button className="blue-text text-darken-2 sidenav-close" onClick={props.viewPhotos}><i className="material-icons right">panorama</i>Photos</button></li> : null}
-				{props.userInfo.loggedIn ? <li><button className="blue-text text-darken-2 sidenav-close" onClick={props.viewPosts}><i className="material-icons right">comment</i>Posts</button></li> : null}
-				{props.userInfo.loggedIn ? <li><button className="blue-text text-darken-2 sidenav-close" onClick={props.viewUser}><i className="material-icons right">person</i>Profile</button></li> : null}
-				{props.userInfo.loggedIn ? <li><button className="blue-text text-darken-2 sidenav-close" onClick={props.viewMaps}><i className="material-icons right">map</i>Parks</button></li> : null}
-		      	{props.userInfo.loggedIn ? <li><button className="blue-text text-darken-2 sidenav-close" onClick={props.handleLogout}>Logout</button></li> : null}
+			    {props.userInfo.loggedIn ? <li><button className="grey-text text-darken-2 sidenav-close" onClick={props.viewPets}><i className="material-icons right">pets</i>Pets</button></li> : null}
+				{props.userInfo.loggedIn ? <li><button className="grey-text text-darken-2 sidenav-close" onClick={props.viewPhotos}><i className="material-icons right">panorama</i>Photos</button></li> : null}
+				{props.userInfo.loggedIn ? <li><button className="grey-text text-darken-2 sidenav-close" onClick={props.viewPosts}><i className="material-icons right">comment</i>Posts</button></li> : null}
+				{props.userInfo.loggedIn ? <li><button className="grey-text text-darken-2 sidenav-close" onClick={props.viewUser}><i className="material-icons right">person</i>Profile</button></li> : null}
+				{props.userInfo.loggedIn ? <li><button className="grey-text text-darken-2 sidenav-close" onClick={props.viewMaps}><i className="material-icons right">map</i>Parks</button></li> : null}
+		      	{props.userInfo.loggedIn ? <li><button className="grey-text text-darken-2 sidenav-close" onClick={props.handleLogout}>Logout</button></li> : null}
 	        </ul>
 		</div>
 	)

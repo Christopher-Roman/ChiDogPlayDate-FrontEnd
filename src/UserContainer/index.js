@@ -14,7 +14,7 @@ class UserContainer extends Component {
 			address: '',
 			_id: '',
 			selectedFile: '',
-			view: '',
+			view: 'profile info',
 			pet: [],
 			post: [],
 			photo: [],
@@ -98,47 +98,39 @@ class UserContainer extends Component {
 		})
 	}
 	viewPet = (e) => {
-		if(!this.state.view) {
+		if(this.state.view !== 'pet') {
 			this.setState({
 				view: 'pet'
 			})	
 		} else {
 			this.setState({
-				view: null
+				view: 'profile info'
 			})
 		}
 	}
 	render() {
 		return (
 			<div>
-				<button onClick={this.viewPet}>Pets</button>
-				<div>
-				<br/>
-				{!this.state.view ? <div> <h1>Hello {this.state.username}</h1>
-				<div className='profile-picture'>
-				{this.state.userPhoto && !this.state.view ? <img alt='User' src={`${process.env.REACT_APP_URL}/${this.state.userPhoto}`} /> : null}
-				</div>
-				<br/>
-				<br/>
-				{this.state.userBio}
-				<br/>
-				<br/>
-				{this.state.userEmail}
-				<br/>
-				<br/>
-				{this.state.userAddress}
-				<br/>
-				<br/>
-				<button onClick={this.printState}>click me</button>
-				<br/>
-				<br/>
+				{this.state.view === 'profile info' ? <div className="container">
+				    <div className="card blue-grey lighten-3 large center-align">
+					    <div className='profile-picture'>
+						  {this.state.userPhoto ? <img alt='User' src={`${process.env.REACT_APP_URL}/${this.state.userPhoto}`} /> : null}
+					    </div>
+					    <span className="card-title blue-text text-darken-2">{this.state.userBio}</span>
+					    <div className="card-action">
+						  <button className="btn-large waves-effect waves-light blue darken-2" onClick={this.viewPet}>Pets</button> 
+						  <button className="btn-large waves-effect waves-light green darken-1">Photos</button>
+						  <button className="btn-large waves-effect waves-light red lighten-1">Posts</button>
+					    </div>
+				    </div>
+				</div> : null }
+				{this.state.view === 'add photo' ? 
 				<form onSubmit={this.handlePhotoUpdate} >
 					<label>Add a Photo</label>
 					<input type='file' name='userPhoto' onChange={this.fileSelectHandler} ref={fileInput => this.fileInput = fileInput} />
 					<button>submit</button>
-				</form>
-				<br/>
-				<br/>
+				</form> : null }
+				{this.state.view === 'update info' ? 
 				<form onSubmit={this.updateUser} >
 					<label>Address</label>
 					<input type='text' name='address' onChange={this.handleChange} />
@@ -147,13 +139,13 @@ class UserContainer extends Component {
 					<label>Email</label>
 					<input type='text' name='emailAddress' onChange={this.handleChange} />
 					<button>submit</button>
-				</form>
-				<br/>
-				<br/>
-				<br/>
-				<br/> </div> : null}
-				</div>
-				{this.state.view === 'pet' ? <Pets user={'user'} petInfo={this.state.pet} userInfo={this.state} name={this.state.username} /> : null}
+				</form> : null }
+				{this.state.view === 'pet' ? 
+					<div>
+						<button className="btn-large waves-effect waves-light blue darken-2" onClick={this.viewPet}>Back</button> 
+						<Pets user={'user'} petInfo={this.state.pet} userInfo={this.state} name={this.state.username} /> 
+					</div>
+				: null}
 			</div>
 		)
 	}

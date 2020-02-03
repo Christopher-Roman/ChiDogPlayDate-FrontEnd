@@ -29,7 +29,9 @@ html, body {
 }
 
 .profile-picture img {
-	max-height: 300px;
+	padding-top: 3%;
+	max-width: 300px;
+	object-fit: contain;
 }
 
 body {
@@ -102,7 +104,7 @@ span {
 
 .post_headers {
 	font-family: 'Lobster', cursive;
-	color: #1976d2;
+	color: #616161;
 }
 
 .new_post {
