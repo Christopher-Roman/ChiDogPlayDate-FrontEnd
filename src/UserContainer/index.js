@@ -179,7 +179,7 @@ class UserContainer extends Component {
 				{this.state.view === 'posts' ?
 					<div>
 						<button className="btn-large waves-effect waves-light red lighten-1" onClick={this.viewPost}>Back <i className="material-icons right">keyboard_arrow_right</i></button>
-						<UserPosts user={'user'} postInfo={this.state.post} />
+						<UserPosts user={'user'} posts={this.state.post} />
 					</div>
 				: null}
 			</div>

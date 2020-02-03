@@ -14,7 +14,8 @@ class PostContainer extends Component {
 			username: props.userInfo.username,
 			postTitle: '',
 			postBody: '',
-			posts: [],
+			usersPosts: [],
+			othersPosts: [],
 			editPost: false,
 			createPost: false,
 			viewPost: false,
@@ -44,10 +45,11 @@ class PostContainer extends Component {
 	}
 	componentDidMount() {
 		this.getPosts().then(post => {
+			console.log(post.data);
 			if(post.status === 200) {
-				let allPosts = post.data
 				this.setState({
-					posts: allPosts,
+					usersPosts: post.data,
+					othersPosts: post.othersPosts,
 					activePosts: true
 				})
 			} else {
@@ -170,6 +172,8 @@ class PostContainer extends Component {
 	    })
   	}
 	render() {
+		console.log(this.state.usersPosts)
+		console.log(this.state.othersPosts);
 		return (
 			<div className='post_container'>
 				<div className='new_post_button'>
@@ -192,7 +196,7 @@ class PostContainer extends Component {
 					{this.state.activePosts && !this.state.newPost && !this.state.editPost && !this.state.viewPost ?
 						<div> 
 						<h1 className='post_headers'>Your Posts</h1>
-						<UserPosts postInfo={this.state.posts} editPostOpen={this.editPostOpen} openPost={this.viewPostToggle} deletePost={this.deletePost} postInfo={this.state.posts} userInfo={this.state.username} />
+						<UserPosts posts={this.state.usersPosts} editPostOpen={this.editPostOpen} openPost={this.viewPostToggle} deletePost={this.deletePost} postInfo={this.state.posts} userInfo={this.state.username} />
 						</div> 
 						: !this.state.activePosts && this.state.viewPost && !this.state.editPost ? <ViewPost userInfo={this.props.userInfo} closePost={this.viewPostToggle} postToView={this.state.postToView} /> 
 						: this.state.editPost && !this.state.activePosts && !this.state.viewPost ? <EditPost userInfo={this.props.userInfo} postToView={this.state.postToEdit} handlePostEditChange={this.handlePostEditChange} postClose={this.editPostClose} postInfo={this.state.posts} /> 
@@ -202,7 +206,7 @@ class PostContainer extends Component {
 					{this.state.activePosts && !this.state.newPost && !this.state.editPost && !this.state.viewPost ? 
 					<div>
 					<h1 className='post_headers'>What's everyone up to?</h1>
-					<OtherPosts postInfo={this.state.posts} userInfo={this.state.username} openPost={this.viewPostToggle} />
+					<OtherPosts postInfo={this.state.othersPosts} userInfo={this.state.username} openPost={this.viewPostToggle} />
 					</div>
 					: null }
 				</div>

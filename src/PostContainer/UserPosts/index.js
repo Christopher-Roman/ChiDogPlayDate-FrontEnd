@@ -2,18 +2,13 @@ import React from 'react';
 require('../../App.css');
 
 const UserPosts = (props) => {
+	console.log(props);
 	let response = null;
-	let userOnly = []
-	const userPosts = props.postInfo.forEach(post => {
-		if(post.createdBy === props.userInfo) {
-			userOnly.push(post)
-		}
-	})
-	if(props.postInfo.length <= 0) {
+	if(props.posts.length <= 0) {
 		response = <p>{props.userInfo}, what's on your mind?</p>
 		return response
 	} else {
-		const posts = props.postInfo.map((post, i) => {
+		const posts = props.posts.map((post, i) => {
 		if(props.user) {
 			return (
 				<div key={i}>

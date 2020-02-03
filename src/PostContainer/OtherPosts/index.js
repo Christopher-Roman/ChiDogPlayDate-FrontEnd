@@ -3,17 +3,11 @@ require('../../App.css');
 
 const OtherPosts = (props) => {
 	let globalResponse = null;
-	let globalOnly = []
-	const globalPosts = props.postInfo.forEach(post => {
-		if(post.createdBy !== props.userInfo) {
-			globalOnly.push(post)
-		}
-	})
-	if(globalOnly.length <= 0) {
+	if(props.postInfo.length <= 0) {
 		globalResponse = <p>Anyone out there?</p>
 		return globalResponse
 	} else {
-		const posts = globalOnly.map((post, i) => {
+		const posts = props.postInfo.map((post, i) => {
 			return (
 			    <div className="" key={i}>
 			      <div className="card grey lighten-1">
