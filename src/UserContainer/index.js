@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Pets from '../PetContainer/Pets'
 import Photos from '../PhotoContainer/Photos'
+import UserPosts from '../PostContainer/UserPosts'
 
 
 class UserContainer extends Component {
@@ -120,6 +121,17 @@ class UserContainer extends Component {
 			})
 		}
 	}
+	viewPost = (e) => {
+		if(this.state.view !== 'posts') {
+			this.setState({
+				view: 'posts'
+			})	
+		} else {
+			this.setState({
+				view: 'profile info'
+			})
+		}
+	}
 	render() {
 		return (
 			<div>
@@ -132,7 +144,7 @@ class UserContainer extends Component {
 					    <div className="card-action">
 						  <button className="btn-large waves-effect waves-light blue darken-2" onClick={this.viewPet}>Pets</button> 
 						  <button className="btn-large waves-effect waves-light green darken-1" onClick={this.viewPhoto}>Photos</button>
-						  <button className="btn-large waves-effect waves-light red lighten-1">Posts</button>
+						  <button className="btn-large waves-effect waves-light red lighten-1" onClick={this.viewPost}>Posts</button>
 					    </div>
 				    </div>
 				</div> : null }
@@ -154,15 +166,21 @@ class UserContainer extends Component {
 				</form> : null }
 				{this.state.view === 'pet' ? 
 					<div>
-						<button className="btn-large waves-effect waves-light blue darken-2" onClick={this.viewPet}>Back<i class="material-icons right">keyboard_arrow_right</i></button> 
+						<button className="btn-large waves-effect waves-light blue darken-2" onClick={this.viewPet}>Back<i className="material-icons right">keyboard_arrow_right</i></button> 
 						<Pets user={'user'} petInfo={this.state.pet} userInfo={this.state} name={this.state.username} /> 
 					</div>
 				: null}
 				{this.state.view === 'photos' ?
 					<div>
-						<button className="btn-large waves-effect waves-light green darken-1" onClick={this.viewPhoto}>Back<i class="material-icons right">keyboard_arrow_right</i></button>
+						<button className="btn-large waves-effect waves-light green darken-1" onClick={this.viewPhoto}>Back<i className="material-icons right">keyboard_arrow_right</i></button>
 						<Photos user={'user'} photoInfo={this.state.photo} userInfo={this.state} name={this.state.username} />
 					</div> 
+				: null}
+				{this.state.view === 'posts' ?
+					<div>
+						<button className="btn-large waves-effect waves-light red lighten-1" onClick={this.viewPost}>Back <i className="material-icons right">keyboard_arrow_right</i></button>
+						<UserPosts user={'user'} postInfo={this.state.post} />
+					</div>
 				: null}
 			</div>
 		)

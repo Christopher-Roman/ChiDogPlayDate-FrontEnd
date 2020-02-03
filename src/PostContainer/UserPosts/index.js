@@ -9,13 +9,25 @@ const UserPosts = (props) => {
 			userOnly.push(post)
 		}
 	})
-	if(userOnly.length <= 0) {
+	if(props.postInfo.length <= 0) {
 		response = <p>{props.userInfo}, what's on your mind?</p>
 		return response
 	} else {
-		const posts = userOnly.map((post, i) => {
+		const posts = props.postInfo.map((post, i) => {
+		if(props.user) {
 			return (
-			    <div className="" key={i}>
+				<div key={i}>
+			      <div className="card grey lighten-1">
+			        <div className="card-content blue-text text-darken-2">
+			          <span className="card-title">{post.postTitle}</span>
+			          <p className='truncate'>{post.postBody}</p>
+			        </div>
+			      </div>
+			    </div>
+			)
+		} else {
+			return (
+			    <div key={i}>
 			      <div className="card grey lighten-1">
 			        <div className="card-content blue-text text-darken-2">
 			          <span className="card-title">{post.postTitle}</span>
@@ -29,7 +41,8 @@ const UserPosts = (props) => {
 			      </div>
 			    </div>
 			)
-		})
+		}
+	})
 		return (
 			<div className='row'>
 			{response}
