@@ -45,25 +45,53 @@ class EditPet extends Component {
     closeAndUpdatePet = async () => {
         try {
             const formData = new FormData();
-            formData.append('petPhoto', this.state.selectedFile, this.state.selectedFile.name);
-            formData.append('bio', this.state.bio);
-            formData.append('firstName', this.state.firstName);
-            formData.append('middleName', this.state.middleName);
-            formData.append('lastName', this.state.lastName);
-            formData.append('weight', this.state.weight);
-            formData.append('age', this.state.age);
-            formData.append('peopleSkills', this.state.peopleSkills);
-            formData.append('dogSkills', this.state.dogSkills);
-            formData.append('favTreat', this.state.favTreat);
-            formData.append('favToy', this.state.favToy);
-            formData.append('breed', this.state.breed);
-            formData.append('fixed', this.state.fixed);
-            formData.append('sex', this.state.sex);
-            formData.append('_id', this.state._id);
-            const editPet = await axios.put(process.env.REACT_APP_URL + '/pet/' + this.state._id + '/update', formData, { withCredentials: true }, {
-            }).then(response => {
-                return response.data
-            })
+            if(this.state.selectedFile) {
+                formData.append('petPhoto', this.state.selectedFile, this.state.selectedFile.name);
+                formData.append('bio', this.state.bio);
+                formData.append('firstName', this.state.firstName);
+                formData.append('middleName', this.state.middleName);
+                formData.append('lastName', this.state.lastName);
+                formData.append('weight', this.state.weight);
+                formData.append('age', this.state.age);
+                formData.append('peopleSkills', this.state.peopleSkills);
+                formData.append('dogSkills', this.state.dogSkills);
+                formData.append('favTreat', this.state.favTreat);
+                formData.append('favToy', this.state.favToy);
+                formData.append('breed', this.state.breed);
+                formData.append('fixed', this.state.fixed);
+                formData.append('sex', this.state.sex);
+                formData.append('_id', this.state._id);
+                const editPet = await axios.put(process.env.REACT_APP_URL + '/pet/' + this.state._id + '/update', formData, { withCredentials: true }, {
+                }).then(response => {
+                    if(response.status === 200) {
+                        console.log(response);
+                    }
+                })
+            } else {
+                formData.append('bio', this.state.bio);
+                formData.append('firstName', this.state.firstName);
+                formData.append('middleName', this.state.middleName);
+                formData.append('lastName', this.state.lastName);
+                formData.append('weight', this.state.weight);
+                formData.append('age', this.state.age);
+                formData.append('peopleSkills', this.state.peopleSkills);
+                formData.append('dogSkills', this.state.dogSkills);
+                formData.append('favTreat', this.state.favTreat);
+                formData.append('favToy', this.state.favToy);
+                formData.append('breed', this.state.breed);
+                formData.append('fixed', this.state.fixed);
+                formData.append('sex', this.state.sex);
+                formData.append('_id', this.state._id);
+                const editPet = await axios.put(process.env.REACT_APP_URL + '/pet/' + this.state._id + '/update', formData, { withCredentials: true }, {
+                }).then(response => {
+                    if(response.status === 200) {
+                        console.log(response.data.data.pet);
+                        // this.setState({
+                        //     ...response.data.data[0]
+                        // })
+                    }
+                })
+            }
         } catch(err) {
             console.error(err)
         }
@@ -82,10 +110,10 @@ class EditPet extends Component {
     render() {
         return (
             <Modal
-            isOpen={this.props.editPetModal} 
+            isOpen={this.state.middleName} 
             style={customStyles}
             onRequestClose={this.props.closeEditPetModal}>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleEditSubmit}>
                     <div className='pet-view-container'>
                         <div className='pet-info-container'>
                             <div className='photo-card'>

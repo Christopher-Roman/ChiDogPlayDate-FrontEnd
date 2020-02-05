@@ -45,7 +45,6 @@ class PostContainer extends Component {
 	}
 	componentDidMount() {
 		this.getPosts().then(post => {
-			console.log(post.data);
 			if(post.status === 200) {
 				this.setState({
 					usersPosts: post.data,
@@ -172,8 +171,6 @@ class PostContainer extends Component {
 	    })
   	}
 	render() {
-		console.log(this.state.usersPosts)
-		console.log(this.state.othersPosts);
 		return (
 			<div className='post_container'>
 				<div className='new_post_button'>

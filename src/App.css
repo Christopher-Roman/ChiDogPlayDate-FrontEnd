@@ -192,3 +192,15 @@ span {
  #comment-button {
  	min-width: 200px;
  }
+
+
+.photo-container {
+	padding-top: 5%;
+}
+
+.Edit-Pet-Form label {
+	color: white;
+	font-size: 20px;
+	font-family: 'Lobster', cursive;
+	color: #616161;
+}
