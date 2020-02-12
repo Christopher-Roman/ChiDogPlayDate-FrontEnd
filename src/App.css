@@ -204,3 +204,7 @@ span {
 	font-family: 'Lobster', cursive;
 	color: #616161;
 }
+
+select {
+	display: inline-block;
+}

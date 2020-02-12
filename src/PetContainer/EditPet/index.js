@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
+import  { dogBreeds, dogSkills, peopleSkills, dogSex, dogFixed, dogTreat, dogPlay, dogToy, dogWeight } from '../../variables'
 
 require('../../App.css');
 
@@ -19,6 +20,15 @@ class EditPet extends Component {
     constructor(props) {
         super(props);
         this.state= {
+            breeds: dogBreeds,
+            dSkills: dogSkills,
+            pSkills: peopleSkills,
+            dSex: dogSex,
+            dTreat: dogTreat,
+            dPlay: dogPlay,
+            dToy: dogToy,
+            dWeight: dogWeight,
+            dFixed: dogFixed,
             _id: this.props.petToEdit._id,
             selectedFile: null,
             firstName: this.props.petToEdit.firstName,
@@ -107,76 +117,94 @@ class EditPet extends Component {
           [e.currentTarget.name]: e.currentTarget.value
         })
     }
+    //<div className='photo-card'>
+       // <div className='photo-container'>
+         //   <img alt='pet' src={`${process.env.REACT_APP_URL}/${this.props.petToEdit.petPhoto}`}/>
+       //   </div>
+       // <input type="file" name="petPhoto" onChange={this.fileSelectHandler} ref={fileInput => this.fileInput = fileInput} />
+    //</div>
     render() {
         return (
             <Modal
-            isOpen={this.state.middleName} 
+            isOpen={this.props.editPetModal} 
             style={customStyles}
             onRequestClose={this.props.closeEditPetModal}>
-                <form onSubmit={this.handleEditSubmit}>
-                    <div className='pet-view-container'>
-                        <div className='pet-info-container'>
-                            <div className='photo-card'>
-                                <div className='photo-container'>
-                                    <img alt='pet' src={`${process.env.REACT_APP_URL}/${this.props.petToEdit.petPhoto}`}/>
-                                </div>
-                                <input type="file" name="petPhoto" onChange={this.fileSelectHandler} ref={fileInput => this.fileInput = fileInput} />
-                            </div>
-                            <br/>
-                            <br/>
-                            <div className='pet-bio-card'>
-                                <div className='pet-bio-container'>
-                                    <label>{`${this.props.petToEdit.firstName}'s Story`}</label><br/>
-                                    <input name='bio' type='text' value={this.state.bio} onChange={this.handleChange}></input><br/><br/>
+                <div>
+                    <br/>
+                    <br/>
+                    <form onSubmit={this.handleEditSubmit}>
+                        <div className='pet-view-container'>
+                            <div className='pet-info-container'>
+                                <div className='pet-bio-card'>
+                                    <div className='pet-bio-container'>
+                                        <label>{`${this.props.petToEdit.firstName}'s Story`}</label><br/>
+                                        <input name='bio' type='text' value={this.state.bio} onChange={this.handleChange}></input><br/><br/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className='pet-information-card'>
-                            <div className='pet-information-container'>
-                                <label>Name</label><br/>
-                                <input name='firstName' type='text' value={this.state.firstName} onChange={this.handleChange}></input><br/><br/>
+                            <div className='pet-information-card'>
+                                <div className='pet-information-container'>
+                                    <label>Name</label><br/>
+                                    <input name='firstName' type='text' value={this.state.firstName} onChange={this.handleChange}></input><br/><br/>
 
-                                <label>Middle Name</label><br/>
-                                <input name='middleName' type='text' value={this.state.middleName} onChange={this.handleChange}></input><br/><br/>
+                                    <label>Middle Name</label><br/>
+                                    <input name='middleName' type='text' value={this.state.middleName} onChange={this.handleChange}></input><br/><br/>
 
-                                <label>Last Name</label><br/>
-                                <input name='lastName' type='text' value={this.state.lastName} onChange={this.handleChange}></input><br/><br/>
+                                    <label>Last Name</label><br/>
+                                    <input name='lastName' type='text' value={this.state.lastName} onChange={this.handleChange}></input><br/><br/>
 
-                                <label>Weight</label><br/>
-                                <input name='weight' type='text' value={this.state.weight} onChange={this.handleChange}></input><br/><br/>
+                                    <label>Weight</label><br/>
+                                    <select name='weight' value={this.state.weight} onChange={this.handleChange} >
+                                        {this.state.dWeight.map((weights) => <option key={weights.value} value={weights.value}>{weights.value}</option>)}
+                                    </select>
 
-                                <label>Age</label><br/>
-                                <input name='age' type='text' value={this.state.age} onChange={this.handleChange}></input><br/><br/>
+                                    <label>Age</label><br/>
+                                    <input name='age' type='text' value={this.state.age} onChange={this.handleChange}></input><br/><br/>
 
-                                <label>People Skills</label><br/>
-                                <input name='peopleSkills' type='text' value={this.state.peopleSkills} onChange={this.handleChange}></input><br/><br/>
+                                    <label>People Skills</label><br/>
+                                    <select name='peopleSkills' value={this.state.peopleSkills} onChange={this.handleChange} >
+                                        {this.state.pSkills.map((pSkill) => <option key={pSkill.value} value={pSkill.value}>{pSkill.value}</option>)}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className='pet-information-card'>
+                                <div className='pet-information-container'>
+                                    <label>
+                                      Breed:
+                                    </label>
+                                      <select name='breed' value={this.state.breed} onChange={this.handleChange} >
+                                        {this.state.breeds.map((breed) => <option key={breed.value} value={breed.value}>{breed.value}</option>)}
+                                    </select>
+                                    <label>Dog Skills</label><br/>
+                                    <select name='dogSkills' value={this.state.dogSkills} onChange={this.handleChange} >
+                                        {this.state.dSkills.map((dSkills) => <option key={dSkills.value} value={dSkills.value}>{dSkills.value}</option>)}
+                                    </select>
+
+                                    <label>Favorite Treat</label><br/>
+                                    <select name='favTreat' value={this.state.favTreat} onChange={this.handleChange} >
+                                        {this.state.dTreat.map((treats) => <option key={treats.value} value={treats.value}>{treats.value}</option>)}
+                                    </select>
+
+                                    <label>Favorite Toy</label><br/>
+                                    <select name='favToy' value={this.state.favToy} onChange={this.handleChange} >
+                                        {this.state.dToy.map((toys) => <option key={toys.value} value={toys.value}>{toys.value}</option>)}
+                                    </select>
+                                    <label>Spayed/Neutered</label><br/>
+                                    <select name='fixed' value={this.state.fixed} onChange={this.handleChange} >
+                                        {this.state.dFixed.map((fix) => <option key={fix.value} value={fix.value}>{fix.value}</option>)}
+                                    </select>
+
+                                    <label>Male/Female</label><br/>
+                                    <select name='sex' value={this.state.sex} onChange={this.handleChange} >
+                                        {this.state.dSex.map((sexes) => <option key={sexes.value} value={sexes.value}>{sexes.value}</option>)}
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div className='pet-information-card'>
-                            <div className='pet-information-container'>
-                                <label>Dog Skills</label><br/>
-                                <input name='dogSkills' type='text' value={this.state.dogSkills} onChange={this.handleChange}></input><br/><br/>
-
-                                <label>Favorite Treat</label><br/>
-                                <input name='favTreat' type='text' value={this.state.favTreat} onChange={this.handleChange}></input><br/><br/>
-
-                                <label>Favorite Toy</label><br/>
-                                <input name='favToy' type='text' value={this.state.favToy} onChange={this.handleChange}></input><br/><br/>
-
-                                <label>Breed</label><br/>
-                                <input name='breed' type='text' value={this.state.breed} onChange={this.handleChange}></input><br/><br/>
-
-                                <label>Spayed/Neutered</label><br/>
-                                <input name='fixed' type='text' value={this.state.fixed} onChange={this.handleChange}></input><br/><br/>
-
-                                <label>Male/Female</label><br/>
-                                <input name='sex' type='text' value={this.state.sex} onChange={this.handleChange}></input><br/><br/>
-                                <button onClick={this.props.closeEditPetModal}>Close</button>
-                            </div>
-                        </div>
-                    </div>
-                    <button>Submit</button>
-                </form>
+                        <button>Submit</button>
+                        <button onClick={this.props.closeEditPetModal}>Close</button>
+                    </form>
+                </div>
           </Modal>
         )
     }
