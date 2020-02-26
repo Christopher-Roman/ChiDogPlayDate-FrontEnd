@@ -134,7 +134,7 @@ class PhotoContainer extends Component {
 				return response.data
 			})
 		} catch(err) {
-			console.error(err)
+			console.error(err) 
 		}
 	}
 	handlePutSubmit = async (e) => {

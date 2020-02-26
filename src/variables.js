@@ -594,7 +594,11 @@ const dogFixed = [
 	{key: 'Spayed',
 	text: 'Spayed',
 	value: 'Spayed',
-	content: 'Spayed'}
+	content: 'Spayed'},
+	{key: 'Unaltered',
+	text: 'Unaltered',
+	value: 'Unaltered',
+	content: 'Unaltered'}
 
 ]
 
